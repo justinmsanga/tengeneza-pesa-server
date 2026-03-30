@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="sw">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Umefanikiwa! — Tengeneza Pesa</title>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:wght@700;800&family=DM+Sans:wght@400;500;600&display=swap" rel="stylesheet"/>
+<style>
+:root{--bg:#FAFAF8;--white:#fff;--ink:#0C0C10;--ink2:#2E2E3A;--muted:#7A7A8C;--line:#E8E8F0;--or:#E8540A;--or2:#FF7A35;--or-bg:#FFF4EE;--or-bd:#FDDAC8;--gn:#007A52;--gn-bg:#E8F5F0;}
+*{margin:0;padding:0;box-sizing:border-box;}
+body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--ink);min-height:100vh;display:flex;flex-direction:column;align-items:center;padding:24px 16px 60px;}
+.card{width:100%;max-width:560px;background:var(--white);border:1px solid var(--line);border-radius:22px;padding:36px 28px;box-shadow:0 16px 48px rgba(0,0,0,.08);margin-top:24px;}
+h1{font-family:'Bricolage Grotesque',sans-serif;font-size:clamp(22px,5vw,30px);font-weight:800;line-height:1.2;margin-bottom:8px;}
+.sub{font-size:14px;color:var(--muted);line-height:1.65;margin-bottom:24px;}
+.hero{text-align:center;padding:20px 0 28px;}
+.hero-icon{font-size:60px;margin-bottom:12px;}
+.bundle-card{display:flex;align-items:flex-start;gap:14px;padding:16px;background:var(--gn-bg);border:1.5px solid #B0DDD0;border-radius:14px;margin-bottom:10px;text-decoration:none;transition:all .18s;cursor:pointer;}
+.bundle-card:hover{opacity:.85;transform:translateY(-1px);}
+.bundle-icon{font-size:28px;flex-shrink:0;line-height:1;margin-top:2px;}
+.bundle-name{font-size:14px;font-weight:600;color:var(--gn);margin-bottom:3px;}
+.bundle-desc{font-size:12px;color:var(--muted);line-height:1.5;}
+.dl-pill{display:inline-flex;align-items:center;gap:5px;margin-top:8px;padding:4px 12px;background:var(--gn);border-radius:100px;font-size:11px;font-weight:700;color:#fff;}
+.section-label{font-size:10px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--muted);margin:20px 0 8px;}
+.wa-btn{display:flex;align-items:center;justify-content:center;gap:8px;width:100%;padding:14px;background:#25D366;border:none;border-radius:13px;font-family:'DM Sans',sans-serif;font-size:14px;font-weight:600;color:#fff;cursor:pointer;margin-top:20px;text-decoration:none;}
+.note{font-size:12px;color:var(--muted);text-align:center;margin-top:14px;line-height:1.6;}
+.logo{font-family:'Bricolage Grotesque',sans-serif;font-size:22px;font-weight:800;color:var(--ink);margin-bottom:4px;}
+.logo span{color:var(--or);}
+.logo-tag{font-size:11px;color:var(--muted);letter-spacing:.1em;text-transform:uppercase;}
+.loading{text-align:center;padding:40px 0;color:var(--muted);font-size:14px;}
+</style>
+</head>
+<body>
+
+<div style="text-align:center;margin-bottom:8px;">
+  <div class="logo">Tengeneza<span>.</span>Pesa</div>
+  <div class="logo-tag">Maarifa · Kipato · Uhuru</div>
+</div>
+
+<div class="card">
+  <div id="content">
+    <div class="loading">⏳ Inathibitisha malipo yako...</div>
+  </div>
+</div>
+
+<script>
+const SERVER = 'https://tengeneza-pesa-server.onrender.com';
+const WA_NUM = '255694953087';
+
+const FOLDER_URL = 'https://drive.google.com/drive/folders/117yvGXV_j3wHZpdc_6caktAnTQmCysIx?usp=sharing';
+
+const BUNDLES = {
+  noCapital:   {name:'📦 Bundle: Zero Shilingi, Mapato Makubwa',    desc:'Ebook kuu + Platforms 30+ + Scripts + Kalenda ya Siku 30 + Bonuses Zote',         url:FOLDER_URL},
+  unemployed:  {name:'📦 Bundle: Bila Kazi? Bado Una Nguvu',        desc:'Ebook kuu + Freelancing Guide + Biashara 5 za Simu + Mindset + Bonuses Zote',     url:FOLDER_URL},
+  lowIncome:   {name:'📦 Bundle: Kutoka Mshahara Mdogo Hadi Uhuru', desc:'Ebook kuu + Bajeti ya Siri + Biashara 5 za TZS 20K + Msaada Miezi 3 + Bonuses',  url:FOLDER_URL},
+  extraIncome: {name:'📦 Bundle: Kipato cha Pili TZS 500K/Mwezi',   desc:'Ebook kuu + Automated Income + Affiliate Marketing + Email List + Bonuses Zote',  url:FOLDER_URL},
+  student:     {name:'📦 Bundle: Mwanachuo Tajiri',                  desc:'Ebook kuu + Freelancing Guide + Social Media Money + Remote Job CV + Bonuses',    url:FOLDER_URL},
+  savings:     {name:'📦 Bundle: Simamia Pesa Yako',                 desc:'Ebook kuu + Bajeti ya Familia + Uwekezaji wa Kwanza + Akiba ya Dharura + Bonuses', url:FOLDER_URL},
+  hopeless:    {name:'📦 Bundle: Simama Tena — Anza Upya',           desc:'Ebook kuu + Hadithi 10 za Waliofufuka + Njia 5 za Haraka + Mindset + Bonuses',    url:FOLDER_URL},
+  noEducation: {name:'📦 Bundle: Ujuzi Ndiyo Unaolipa',              desc:'Ebook kuu + Video Tutorials Kiswahili + Hatua 0 hadi Pesa + Msaada WA 30 Siku',  url:FOLDER_URL},
+};
+
+async function init() {
+  const params   = new URLSearchParams(window.location.search);
+  const orderId  = params.get('orderId');
+  const category = params.get('category') || 'extraIncome';
+
+  // Kama hakuna orderId — recovery flow
+  if (!orderId) {
+    window.location.href = 'recover.html';
+    return;
+  }
+
+  // Thibitisha malipo upya kwa usalama
+  try {
+    const r    = await fetch(`${SERVER}/payment-status?orderId=${orderId}`);
+    const data = await r.json();
+
+    if (!data.paid) {
+      // Bado hajalipa — rudi index
+      document.getElementById('content').innerHTML = `
+        <div style="text-align:center;padding:20px 0;">
+          <div style="font-size:40px;margin-bottom:12px;">⚠️</div>
+          <h1 style="font-size:20px;margin-bottom:8px;">Malipo Hayajakamilika</h1>
+          <p class="sub">Malipo yako bado hayajathibitishwa. Kama umelipa — subiri dakika 1-2 kisha reload.</p>
+          <button onclick="location.reload()" style="padding:12px 24px;background:var(--or);border:none;border-radius:10px;color:#fff;font-size:14px;font-weight:600;cursor:pointer;margin-top:8px;">🔄 Angalia Tena</button>
+          <br/><a href="recover.html" style="display:block;margin-top:12px;font-size:13px;color:var(--muted);">Au ingiza namba yako hapa →</a>
+        </div>`;
+      return;
+    }
+
+    showDownloads(data.category || category);
+
+  } catch(e) {
+    // Kama server haifikii — onyesha downloads tu (user tayari amelipa)
+    showDownloads(category);
+  }
+}
+
+function showDownloads(category) {
+  const bundle = BUNDLES[category] || BUNDLES.extraIncome;
+  const waMsg  = encodeURIComponent('Habari! Nimelipa kwenye Tengeneza Pesa lakini nahitaji msaada wa kupakua. Tafadhali nisaidie!');
+
+  document.getElementById('content').innerHTML = `
+    <div class="hero">
+      <div class="hero-icon">🎉</div>
+      <h1>Malipo Yamekamilika!</h1>
+      <p class="sub">Asante sana kwa ununuzi wako. Bundle yako iko tayari kupakua sasa hivi.</p>
+    </div>
+
+    <div class="section-label">📂 Bundle Yako — Bonyeza Kupakua</div>
+
+    <a href="${bundle.url}" target="_blank" class="bundle-card">
+      <div class="bundle-icon">📁</div>
+      <div>
+        <div class="bundle-name">${bundle.name}</div>
+        <div class="bundle-desc">${bundle.desc}</div>
+        <div class="dl-pill">⬇️ Fungua na Upakue</div>
+      </div>
+    </a>
+
+    <a href="https://wa.me/${WA_NUM}?text=${waMsg}" target="_blank" class="wa-btn">
+      💬 Msaada wa WhatsApp
+    </a>
+
+    <p class="note">
+      🔒 Hifadhi bundle yako kwenye simu yako sasa hivi.<br/>
+      Ukipoteza access — nenda <a href="recover.html" style="color:var(--or);">recover.html</a> uweke namba yako.
+    </p>`;
+}
+
+init();
+</script>
+</body>
+</html>

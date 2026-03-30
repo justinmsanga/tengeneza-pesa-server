@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="sw">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Rudisha Access Yako — Tengeneza Pesa</title>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:wght@700;800&family=DM+Sans:wght@400;500;600&display=swap" rel="stylesheet"/>
+<style>
+:root{--bg:#FAFAF8;--white:#fff;--ink:#0C0C10;--ink2:#2E2E3A;--muted:#7A7A8C;--line:#E8E8F0;--or:#E8540A;--or2:#FF7A35;--or-bg:#FFF4EE;--or-bd:#FDDAC8;--gn:#007A52;--gn-bg:#E8F5F0;--rd:#C92A2A;--rd-bg:#FEF0EE;}
+*{margin:0;padding:0;box-sizing:border-box;}
+body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--ink);min-height:100vh;display:flex;flex-direction:column;align-items:center;padding:24px 16px 60px;}
+.card{width:100%;max-width:480px;background:var(--white);border:1px solid var(--line);border-radius:22px;padding:36px 28px;box-shadow:0 16px 48px rgba(0,0,0,.08);margin-top:24px;}
+h1{font-family:'Bricolage Grotesque',sans-serif;font-size:clamp(20px,4vw,26px);font-weight:800;line-height:1.2;margin-bottom:8px;}
+.sub{font-size:14px;color:var(--muted);line-height:1.65;margin-bottom:28px;}
+label{display:block;font-size:13px;font-weight:500;color:var(--ink2);margin-bottom:7px;}
+input{width:100%;padding:14px 16px;background:var(--bg);border:1.5px solid var(--line);border-radius:12px;font-family:'DM Sans',sans-serif;font-size:16px;font-weight:500;color:var(--ink);outline:none;transition:border-color .2s;}
+input:focus{border-color:var(--or);background:var(--white);}
+input::placeholder{color:var(--muted);font-weight:400;}
+.btn{width:100%;padding:15px;border:none;border-radius:13px;font-family:'DM Sans',sans-serif;font-size:15px;font-weight:600;cursor:pointer;transition:all .2s;margin-top:16px;background:linear-gradient(135deg,var(--or),var(--or2));color:#fff;}
+.btn:hover{transform:translateY(-2px);box-shadow:0 8px 22px rgba(232,84,10,.3);}
+.btn:disabled{opacity:.4;cursor:not-allowed;transform:none;box-shadow:none;}
+.success-box{background:var(--gn-bg);border:1.5px solid #B0DDD0;border-radius:14px;padding:20px;margin-top:20px;display:none;}
+.error-box{background:var(--rd-bg);border:1px solid #FCCEC9;border-radius:12px;padding:16px;margin-top:16px;display:none;font-size:13px;color:var(--rd);}
+.wa-btn{display:flex;align-items:center;justify-content:center;gap:8px;width:100%;padding:13px;background:#25D366;border:none;border-radius:13px;font-family:'DM Sans',sans-serif;font-size:14px;font-weight:600;color:#fff;cursor:pointer;margin-top:12px;text-decoration:none;}
+.logo{font-family:'Bricolage Grotesque',sans-serif;font-size:22px;font-weight:800;color:var(--ink);}
+.logo span{color:var(--or);}
+.logo-tag{font-size:11px;color:var(--muted);letter-spacing:.1em;text-transform:uppercase;margin-top:2px;}
+</style>
+</head>
+<body>
+
+<div style="text-align:center;margin-bottom:8px;">
+  <div class="logo">Tengeneza<span>.</span>Pesa</div>
+  <div class="logo-tag">Maarifa · Kipato · Uhuru</div>
+</div>
+
+<div class="card">
+  <div style="font-size:38px;margin-bottom:14px;">🔑</div>
+  <h1>Rudisha Access Yako</h1>
+  <p class="sub">Umelipa lakini hukudownload au umepoteza link? Ingiza namba uliyolipia — tutakurudishia mara moja.</p>
+
+  <label>Namba yako ya simu uliyolipia:</label>
+  <input type="tel" id="phoneInput" placeholder="Mfano: 0712345678 au 0768078504"
+    oninput="document.getElementById('recoverBtn').disabled=!this.value.trim().replace(/\D/g,'').length>=9"
+    onkeydown="if(event.key==='Enter')recover()"/>
+
+  <button class="btn" id="recoverBtn" onclick="recover()" disabled>
+    🔍 Tafuta Malipo Yangu
+  </button>
+
+  <!-- SUCCESS -->
+  <div class="success-box" id="successBox">
+    <div style="font-size:20px;font-weight:700;color:var(--gn);margin-bottom:6px;">✅ Imepatikana!</div>
+    <div style="font-size:13px;color:var(--ink2);margin-bottom:14px;">Malipo yako yamethibitishwa. Unakuelekeza kwenye bundle yako...</div>
+    <div style="font-size:12px;color:var(--muted);" id="redirectMsg">Ukurasa utabadilika sekunde chache...</div>
+  </div>
+
+  <!-- ERROR -->
+  <div class="error-box" id="errorBox">
+    <strong>Haijapatikana</strong><br/>
+    <span id="errorMsg">Malipo hayajapatikana kwa namba hii.</span>
+  </div>
+
+  <!-- WA MSAADA -->
+  <a href="https://wa.me/255694953087?text=Habari%21+Nimelipa+kwenye+Tengeneza+Pesa+lakini+siwezi+kupata+bundle+yangu.+Namba+yangu%3A+" 
+    id="waBtn" target="_blank" class="wa-btn" style="display:none;">
+    💬 Wasiliana Nasi WhatsApp
+  </a>
+
+  <p style="font-size:12px;color:var(--muted);text-align:center;margin-top:20px;line-height:1.6;">
+    Tatizo lingine? Tuma WhatsApp: <strong>+255 694 953 087</strong>
+  </p>
+</div>
+
+<script>
+const SERVER = 'https://tengeneza-pesa-server.onrender.com';
+
+async function recover() {
+  const phone = document.getElementById('phoneInput').value.trim();
+  if (!phone) return;
+
+  const btn = document.getElementById('recoverBtn');
+  btn.disabled  = true;
+  btn.textContent = '⏳ Inatafuta...';
+
+  document.getElementById('successBox').style.display = 'none';
+  document.getElementById('errorBox').style.display   = 'none';
+  document.getElementById('waBtn').style.display      = 'none';
+
+  try {
+    const r    = await fetch(`${SERVER}/recover?phone=${encodeURIComponent(phone)}`);
+    const data = await r.json();
+
+    if (data.success && data.found) {
+      document.getElementById('successBox').style.display = 'block';
+
+      // Countdown redirect
+      let secs = 3;
+      const interval = setInterval(() => {
+        secs--;
+        document.getElementById('redirectMsg').textContent = `Ukurasa utabadilika baada ya sekunde ${secs}...`;
+        if (secs <= 0) {
+          clearInterval(interval);
+          window.location.href = `success.html?orderId=${data.orderId}&category=${data.category}`;
+        }
+      }, 1000);
+
+    } else {
+      document.getElementById('errorBox').style.display = 'block';
+      document.getElementById('errorMsg').textContent =
+        'Malipo hayajapatikana kwa namba hii. Hakikisha namba ni ile ile uliyotumia kulipa.';
+      document.getElementById('waBtn').style.display = 'flex';
+
+      btn.disabled    = false;
+      btn.textContent = '🔍 Tafuta Tena';
+    }
+
+  } catch(e) {
+    document.getElementById('errorBox').style.display = 'block';
+    document.getElementById('errorMsg').textContent   = 'Tatizo la mtandao. Angalia internet yako na jaribu tena.';
+    document.getElementById('waBtn').style.display    = 'flex';
+
+    btn.disabled    = false;
+    btn.textContent = '🔍 Jaribu Tena';
+  }
+}
+</script>
+</body>
+</html>
