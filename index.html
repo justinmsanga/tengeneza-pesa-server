@@ -1,0 +1,1293 @@
+<!DOCTYPE html>
+<html lang="sw">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Tengeneza Pesa — Njia Zilizothibitishwa za Kuingiza Hela Mtandaoni</title>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:wght@400;500;600;700;800&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet"/>
+<style>
+:root{
+  --bg:#FAFAF8;--white:#FFFFFF;--ink:#0C0C10;--ink2:#2E2E3A;
+  --muted:#7A7A8C;--line:#E8E8F0;--or:#E8540A;--or2:#FF7A35;
+  --or-bg:#FFF4EE;--or-bd:#FDDAC8;--gn:#007A52;--gn-bg:#E8F5F0;
+  --rd:#C92A2A;--rd-bg:#FEF0EE;--go:#B8860B;--go-bg:#FDF6E8;
+  --pu:#5B21B6;--pu-bg:#F5F3FF;
+}
+*{margin:0;padding:0;box-sizing:border-box;}
+body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--ink);min-height:100vh;display:flex;flex-direction:column;align-items:center;padding:0 16px 80px;}
+
+/* BANNER */
+.banner{width:100%;background:var(--ink);color:#fff;text-align:center;padding:11px 16px;font-size:13px;display:flex;align-items:center;justify-content:center;gap:8px;margin-bottom:0;}
+.bdot{width:7px;height:7px;border-radius:50%;background:var(--or2);animation:blink 1.5s infinite;flex-shrink:0;}
+@keyframes blink{0%,100%{opacity:1;transform:scale(1);}50%{opacity:.4;transform:scale(1.4);}}
+
+/* HERO STRIP */
+.hero-strip{width:100%;background:linear-gradient(135deg,var(--or),var(--or2));color:#fff;padding:32px 20px 26px;text-align:center;margin-bottom:24px;}
+.hero-strip .hs-internet{font-size:12px;font-weight:400;letter-spacing:.06em;opacity:.75;margin-bottom:14px;font-style:italic;}
+.hero-strip h1{font-family:'Bricolage Grotesque',sans-serif;font-size:clamp(24px,5.5vw,38px);font-weight:800;line-height:1.15;margin-bottom:12px;letter-spacing:-.02em;}
+.hero-strip h1 em{font-style:normal;text-decoration:underline;text-decoration-color:rgba(255,255,255,.5);text-underline-offset:4px;}
+.hero-strip p{font-size:14px;opacity:.9;line-height:1.65;max-width:520px;margin:0 auto 18px;}
+.hero-badges{display:flex;flex-wrap:wrap;justify-content:center;gap:8px;}
+.hb{display:inline-flex;align-items:center;gap:5px;padding:5px 12px;background:rgba(255,255,255,.18);border:1px solid rgba(255,255,255,.3);border-radius:100px;font-size:12px;font-weight:500;}
+
+/* LOGO */
+.logo{margin:0 0 16px;text-align:center;}
+.logo-name{font-family:'Bricolage Grotesque',sans-serif;font-size:26px;font-weight:800;letter-spacing:-.02em;color:var(--ink);}
+.logo-name span{color:var(--or);}
+.logo-tag{font-size:11px;color:var(--muted);letter-spacing:.12em;text-transform:uppercase;margin-top:2px;}
+
+/* PROOF BAR */
+.proof-bar{width:100%;max-width:600px;display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--line);border:1px solid var(--line);border-radius:14px;overflow:hidden;margin-bottom:16px;}
+.proof-item{background:var(--white);padding:12px 8px;text-align:center;}
+.proof-num{font-family:'Bricolage Grotesque',sans-serif;font-size:22px;font-weight:800;color:var(--or);}
+.proof-lbl{font-size:11px;color:var(--muted);margin-top:2px;line-height:1.3;}
+
+/* LIVE BAR */
+.livebar{width:100%;max-width:600px;display:flex;align-items:center;gap:8px;padding:10px 14px;margin-bottom:14px;background:var(--white);border:1px solid var(--line);border-radius:10px;font-size:13px;color:var(--ink2);box-shadow:0 1px 4px rgba(0,0,0,.05);}
+.ldot{width:7px;height:7px;border-radius:50%;background:var(--gn);flex-shrink:0;animation:blink 1.4s infinite;}
+
+/* PROGRESS */
+.prog-wrap{width:100%;max-width:600px;margin-bottom:18px;}
+.prog-top{display:flex;justify-content:space-between;align-items:center;margin-bottom:7px;}
+.prog-label{font-size:12px;font-weight:500;color:var(--muted);letter-spacing:.05em;text-transform:uppercase;}
+.prog-pct{font-size:12px;font-weight:700;color:var(--or);}
+.prog-track{height:4px;background:var(--line);border-radius:2px;overflow:hidden;}
+.prog-fill{height:100%;background:linear-gradient(90deg,var(--or),var(--or2));border-radius:2px;transition:width .5s cubic-bezier(.4,0,.2,1);}
+.prog-steps{display:flex;gap:3px;margin-top:8px;}
+.ps{flex:1;height:3px;border-radius:2px;background:var(--line);transition:background .3s;}
+.ps.done{background:var(--or);}
+.ps.active{background:var(--or2);}
+
+/* CARD */
+.card{width:100%;max-width:600px;background:var(--white);border:1px solid var(--line);border-radius:22px;padding:36px 32px;box-shadow:0 16px 48px rgba(0,0,0,.09);animation:up .4s cubic-bezier(.4,0,.2,1);}
+@keyframes up{from{opacity:0;transform:translateY(16px);}to{opacity:1;transform:translateY(0);}}
+
+.badge{display:inline-flex;align-items:center;gap:6px;padding:4px 14px;border-radius:100px;background:var(--or-bg);border:1px solid var(--or-bd);font-size:11px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:var(--or);margin-bottom:16px;}
+.card h2{font-family:'Bricolage Grotesque',sans-serif;font-size:clamp(19px,4vw,26px);font-weight:700;line-height:1.2;margin-bottom:8px;letter-spacing:-.01em;}
+.card .sub{font-size:14px;color:var(--muted);line-height:1.65;margin-bottom:22px;}
+
+/* INTERNET HOOK BOX */
+.hook-box{background:linear-gradient(135deg,#0C0C10,#1A1A28);border-radius:16px;padding:20px 22px;margin-bottom:22px;color:#fff;}
+.hook-box .hb-title{font-family:'Bricolage Grotesque',sans-serif;font-size:16px;font-weight:700;color:var(--or2);margin-bottom:8px;}
+.hook-box p{font-size:13px;line-height:1.7;color:rgba(255,255,255,.85);}
+.hook-box .hb-highlight{color:var(--or2);font-weight:600;}
+
+/* NAME INPUT */
+.name-wrap{margin-bottom:20px;}
+.name-wrap label{display:block;font-size:13px;font-weight:500;color:var(--ink2);margin-bottom:8px;}
+.name-wrap input{width:100%;padding:14px 16px;background:var(--bg);border:1.5px solid var(--line);border-radius:12px;color:var(--ink);font-family:'DM Sans',sans-serif;font-size:16px;font-weight:500;outline:none;transition:border-color .2s;}
+.name-wrap input:focus{border-color:var(--or);background:var(--white);}
+.name-wrap input::placeholder{color:var(--muted);font-weight:400;}
+
+/* OPTIONS */
+.opts{display:flex;flex-direction:column;gap:8px;margin-bottom:20px;}
+.opts-grid{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:20px;}
+.opt{display:flex;align-items:center;gap:12px;padding:14px 16px;border-radius:13px;background:var(--bg);border:1.5px solid var(--line);cursor:pointer;transition:all .18s;position:relative;overflow:hidden;}
+.opt::before{content:'';position:absolute;left:0;top:0;bottom:0;width:3px;background:var(--or);opacity:0;transition:opacity .2s;border-radius:3px 0 0 3px;}
+.opt:hover{border-color:var(--or-bd);background:var(--or-bg);transform:translateX(3px);}
+.opt:hover::before{opacity:.5;}
+.opt.sel{border-color:var(--or);background:var(--or-bg);}
+.opt.sel::before{opacity:1;}
+.opts-grid .opt:hover{transform:translateY(-2px);}
+.opt-e{font-size:22px;width:32px;text-align:center;flex-shrink:0;}
+.opt-body{flex:1;}
+.opt-t{font-size:14px;font-weight:500;color:var(--ink);}
+.opt-h{font-size:12px;color:var(--muted);margin-top:1px;line-height:1.4;}
+.opt-chk{width:20px;height:20px;border-radius:50%;border:2px solid var(--line);flex-shrink:0;display:flex;align-items:center;justify-content:center;background:var(--white);transition:all .18s;}
+.opt.sel .opt-chk{background:var(--or);border-color:var(--or);}
+.chk-i{display:none;}
+.opt.sel .chk-i{display:block;}
+
+/* MOTIVATIONAL BOX */
+.motiv-box{border-radius:14px;padding:16px 18px;margin-bottom:18px;border-left:4px solid var(--or);}
+.motiv-box.dark{background:var(--ink);color:#fff;}
+.motiv-box.orange{background:var(--or-bg);border-color:var(--or);}
+.motiv-box .mb-q{font-family:'Bricolage Grotesque',sans-serif;font-size:15px;font-weight:700;margin-bottom:6px;}
+.motiv-box .mb-q.light{color:#fff;}
+.motiv-box .mb-q.orange{color:var(--or);}
+.motiv-box p{font-size:13px;line-height:1.6;}
+.motiv-box p.light{color:rgba(255,255,255,.8);}
+.motiv-box p.dark{color:var(--ink2);}
+
+/* TEXTAREA */
+.ta-wrap{margin-bottom:18px;}
+.ta-lbl{display:flex;justify-content:space-between;align-items:center;margin-bottom:7px;}
+.ta-lbl span{font-size:13px;font-weight:500;color:var(--ink2);}
+.optional{font-size:11px;padding:2px 10px;border-radius:100px;background:var(--line);color:var(--muted);font-weight:500;}
+textarea{width:100%;min-height:88px;padding:13px 15px;background:var(--bg);border:1.5px solid var(--line);border-radius:11px;color:var(--ink);font-family:'DM Sans',sans-serif;font-size:14px;line-height:1.6;outline:none;resize:none;transition:border-color .2s;}
+textarea:focus{border-color:var(--or);background:var(--white);}
+textarea::placeholder{color:var(--muted);}
+.char-c{text-align:right;font-size:11px;color:var(--muted);margin-top:4px;}
+
+/* GREETING CARD */
+.greeting{background:linear-gradient(135deg,var(--or-bg),#FFF8F0);border:1.5px solid var(--or-bd);border-radius:16px;padding:20px;margin-bottom:18px;text-align:center;}
+.greeting-emoji{font-size:34px;margin-bottom:8px;}
+.greeting h3{font-family:'Bricolage Grotesque',sans-serif;font-size:20px;font-weight:700;color:var(--ink);line-height:1.3;margin-bottom:6px;}
+.greeting p{font-size:13px;color:var(--muted);line-height:1.5;}
+
+/* BUTTONS */
+.btn{width:100%;padding:15px;border:none;border-radius:13px;font-family:'DM Sans',sans-serif;font-size:15px;font-weight:600;cursor:pointer;transition:all .2s;letter-spacing:.01em;}
+.btn-dark{background:var(--ink);color:#fff;}
+.btn-dark:hover{background:#1A1A26;transform:translateY(-2px);box-shadow:0 8px 22px rgba(12,12,16,.2);}
+.btn-dark:disabled{opacity:.25;cursor:not-allowed;transform:none;box-shadow:none;}
+.btn-or{background:linear-gradient(135deg,var(--or),var(--or2));color:#fff;}
+.btn-or:hover{transform:translateY(-2px);box-shadow:0 8px 22px rgba(232,84,10,.3);}
+.btn-ghost{background:transparent;color:var(--muted);border:1.5px solid var(--line);margin-top:8px;}
+.btn-ghost:hover{color:var(--ink);border-color:var(--ink);}
+
+/* OFFER */
+.offer-header{text-align:center;margin-bottom:20px;}
+.offer-eyebrow{display:inline-flex;align-items:center;gap:6px;padding:5px 16px;border-radius:100px;background:var(--go-bg);border:1px solid #E8D080;font-size:11px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--go);margin-bottom:12px;}
+.urgency{display:flex;align-items:center;justify-content:space-between;padding:13px 16px;border-radius:13px;background:var(--rd-bg);border:1px solid #FCCEC9;margin-bottom:10px;flex-wrap:wrap;gap:8px;}
+.urg-l{display:flex;align-items:center;gap:8px;font-size:13px;color:var(--rd);font-weight:500;}
+.cdown{font-family:'Bricolage Grotesque',sans-serif;font-size:24px;font-weight:700;color:var(--rd);}
+.scarcity{display:flex;align-items:center;gap:10px;padding:9px 14px;border-radius:10px;background:var(--or-bg);border:1px solid var(--or-bd);margin-bottom:18px;font-size:12px;}
+.sc-bar{flex:1;height:5px;background:var(--line);border-radius:3px;overflow:hidden;}
+.sc-fill{height:100%;background:linear-gradient(90deg,var(--or),#E8B840);border-radius:3px;}
+.sc-t{color:var(--or);font-weight:700;white-space:nowrap;}
+.product{border:1.5px solid var(--line);border-radius:18px;overflow:hidden;margin-bottom:18px;}
+.pt{padding:20px 22px;border-bottom:1px solid var(--line);}
+.pt-lbl{font-size:10px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--or);margin-bottom:7px;}
+.pt-name{font-family:'Bricolage Grotesque',sans-serif;font-size:clamp(16px,3vw,21px);font-weight:700;color:var(--ink);margin-bottom:6px;line-height:1.2;}
+.pt-tag{font-size:13px;color:var(--ink2);line-height:1.6;}
+.bwrap{padding:16px 22px;border-bottom:1px solid var(--line);background:var(--bg);}
+.btitle{font-size:11px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);margin-bottom:10px;}
+.blist{display:flex;flex-direction:column;gap:7px;}
+.bitem{display:flex;align-items:flex-start;gap:10px;padding:10px 13px;background:var(--white);border:1px solid var(--line);border-radius:11px;}
+.bnum{min-width:24px;height:24px;border-radius:50%;background:var(--ink);color:#fff;display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:700;flex-shrink:0;}
+.bbody{flex:1;}
+.bname{font-size:13px;font-weight:500;color:var(--ink);}
+.bdesc{font-size:11px;color:var(--muted);margin-top:2px;line-height:1.4;}
+.bval{font-size:11px;font-weight:700;color:var(--gn);padding:2px 8px;background:var(--gn-bg);border-radius:100px;white-space:nowrap;flex-shrink:0;}
+.price-row{padding:16px 22px;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:10px;}
+.p-was{font-size:12px;color:var(--muted);text-decoration:line-through;margin-bottom:2px;}
+.p-now{font-family:'Bricolage Grotesque',sans-serif;font-size:34px;font-weight:800;color:var(--ink);line-height:1;}
+.p-now sub{font-family:'DM Sans',sans-serif;font-size:13px;font-weight:500;vertical-align:super;margin-right:2px;}
+.save-pill{padding:4px 13px;background:var(--gn-bg);border:1px solid #B0DDD0;border-radius:100px;font-size:12px;font-weight:700;color:var(--gn);}
+.vstack{padding:12px 22px;background:var(--bg);border-top:1px dashed var(--line);font-size:12px;color:var(--muted);text-align:center;}
+.guar{display:flex;align-items:center;gap:13px;padding:13px 17px;margin-bottom:16px;background:var(--gn-bg);border:1px solid #B0DDD0;border-radius:13px;}
+.reviews{display:flex;flex-direction:column;gap:12px;margin-bottom:22px;}
+.rev{padding:18px 20px;background:var(--white);border:1.5px solid var(--line);border-radius:14px;box-shadow:0 2px 8px rgba(0,0,0,.05);}
+.rev-header{display:flex;align-items:center;gap:10px;margin-bottom:10px;}
+.rev-avatar{width:40px;height:40px;border-radius:50%;background:linear-gradient(135deg,var(--or),var(--or2));display:flex;align-items:center;justify-content:center;font-size:16px;flex-shrink:0;color:#fff;font-weight:700;}
+.rev-meta{flex:1;}
+.rev-name{font-size:14px;font-weight:600;color:var(--ink);}
+.rev-loc{font-size:12px;color:var(--muted);margin-top:1px;}
+.rev-stars{color:#F59E0B;font-size:15px;letter-spacing:1px;}
+.rev-text{font-size:14px;color:var(--ink2);line-height:1.65;font-style:italic;}
+.rev-result{display:inline-flex;align-items:center;gap:5px;margin-top:10px;padding:4px 12px;background:var(--gn-bg);border:1px solid #B0DDD0;border-radius:100px;font-size:12px;font-weight:600;color:var(--gn);}
+.reviews-title{font-size:16px;font-weight:700;color:var(--ink);margin-bottom:14px;font-family:'Bricolage Grotesque',sans-serif;}
+.trust-row{display:flex;justify-content:center;gap:14px;flex-wrap:wrap;margin-top:12px;}
+.ti{display:flex;align-items:center;gap:5px;font-size:12px;color:var(--muted);}
+
+/* MODAL */
+.overlay{display:none;position:fixed;inset:0;background:rgba(12,12,16,.65);backdrop-filter:blur(6px);z-index:100;align-items:flex-end;justify-content:center;}
+.overlay.open{display:flex;}
+.modal{background:var(--white);border-radius:26px 26px 0 0;padding:26px 22px 36px;width:100%;max-width:520px;animation:slideUp .35s cubic-bezier(.4,0,.2,1);border-top:3px solid var(--or);}
+@keyframes slideUp{from{transform:translateY(100%);}to{transform:translateY(0);}}
+.modal-handle{width:38px;height:4px;background:var(--line);border-radius:2px;margin:0 auto 20px;}
+.modal h3{font-family:'Bricolage Grotesque',sans-serif;font-size:22px;font-weight:700;margin-bottom:5px;}
+.modal-sub{font-size:13px;color:var(--muted);margin-bottom:18px;}
+.pay-steps{display:flex;flex-direction:column;gap:8px;margin-bottom:16px;}
+.pstep{display:flex;align-items:flex-start;gap:12px;padding:12px 14px;background:var(--bg);border-radius:11px;border:1px solid var(--line);}
+.pnum{min-width:26px;height:26px;border-radius:50%;background:var(--ink);color:#fff;display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:700;flex-shrink:0;}
+.pt2{font-size:13px;font-weight:500;margin-bottom:3px;}
+.ps2{font-size:12px;color:var(--muted);line-height:1.5;}
+.pay-btn{display:inline-flex;align-items:center;gap:6px;margin-top:7px;padding:7px 14px;background:var(--or);border-radius:8px;font-size:13px;font-weight:600;color:#fff;cursor:pointer;border:none;font-family:'DM Sans',sans-serif;text-decoration:none;}
+.wa-btn2{display:inline-flex;align-items:center;gap:6px;margin-top:7px;padding:7px 14px;background:#25D366;border-radius:8px;font-size:13px;font-weight:600;color:#fff;cursor:pointer;border:none;font-family:'DM Sans',sans-serif;}
+.modal-close{width:100%;padding:12px;background:transparent;border:1.5px solid var(--line);border-radius:11px;color:var(--muted);font-family:'DM Sans',sans-serif;font-size:13px;cursor:pointer;transition:all .15s;margin-top:6px;}
+.modal-close:hover{border-color:var(--ink);color:var(--ink);}
+
+/* STICKY */
+.sticky{position:fixed;bottom:0;left:0;right:0;padding:10px 16px;background:var(--white);border-top:1px solid var(--line);display:none;align-items:center;justify-content:space-between;gap:12px;z-index:50;box-shadow:0 -4px 18px rgba(0,0,0,.07);}
+.sticky.show{display:flex;}
+.sp{font-family:'Bricolage Grotesque',sans-serif;font-size:20px;font-weight:700;white-space:nowrap;}
+.sp small{font-family:'DM Sans',sans-serif;font-size:11px;color:var(--muted);display:block;font-weight:400;}
+.sbtn{flex:1;max-width:260px;padding:12px;border:none;border-radius:11px;background:linear-gradient(135deg,var(--or),var(--or2));color:#fff;font-family:'DM Sans',sans-serif;font-size:14px;font-weight:600;cursor:pointer;transition:all .2s;}
+.sbtn:hover{transform:translateY(-1px);box-shadow:0 5px 18px rgba(232,84,10,.3);}
+
+@media(max-width:480px){.card{padding:24px 18px;}.opts-grid{grid-template-columns:1fr;}.hero-strip h1{font-size:20px;}}
+</style>
+</head>
+<body>
+
+<!-- BANNER -->
+<div class="banner"><div class="bdot"></div><span id="bannerMsg">Una internet? Basi una biashara — watu 2,400+ wa Tanzania wameithibitisha</span></div>
+
+<!-- HERO STRIP -->
+<div class="hero-strip">
+  <div class="hs-internet">Unasoma hii kwa sababu una internet — hiyo inatosha kuanza</div>
+  <h1>MFUMO WA SIKU 30: Njia <em>Zilizothibitishwa</em> za Kupata Kipato chako cha Kwanza Mtandaoni kwa Watanzania (Bila Mtaji)</h1>
+  <p>Kwa vijana wasio na ajira, wazazi wanaotunza familia, watu wanaotafuta njia — hii ndiyo fursa yako ya kweli. Watu 2,400+ wa Tanzania wameshathibitisha.</p>
+  <div class="hero-badges">
+    <div class="hb">🇹🇿 Imeundwa Tanzania</div>
+    <div class="hb">📱 Simu inatosha</div>
+    <div class="hb">💰 Bila mtaji</div>
+    <div class="hb">⏱️ Anza leo hii</div>
+  </div>
+</div>
+
+<!-- LOGO -->
+<div class="logo"><div class="logo-name">Tengeneza<span>.</span>Pesa</div><div class="logo-tag">Maarifa · Kipato · Uhuru</div></div>
+
+<!-- PROOF BAR -->
+<div class="proof-bar">
+  <div class="proof-item"><div class="proof-num">2,400+</div><div class="proof-lbl">Watanzania wamefanikiwa</div></div>
+  <div class="proof-item"><div class="proof-num">Ebooks 8</div><div class="proof-lbl">Mada tofauti — mtu mmoja mmoja</div></div>
+  <div class="proof-item"><div class="proof-num">4.9★</div><div class="proof-lbl">Rating ya wateja wetu</div></div>
+</div>
+
+<!-- LIVE BAR -->
+<div class="livebar"><div class="ldot"></div><span id="liveMsg">Mtu kutoka Dar es Salaam amenunua dakika 3 zilizopita</span></div>
+
+<!-- PROGRESS -->
+<div class="prog-wrap">
+  <div class="prog-top"><span class="prog-label" id="progLabel">Hatua 1 / 7</span><span class="prog-pct" id="progPct">0%</span></div>
+  <div class="prog-track"><div class="prog-fill" id="progFill" style="width:0%"></div></div>
+  <div class="prog-steps" id="progSteps"></div>
+</div>
+
+<!-- CARD -->
+<div class="card" id="card"></div>
+
+<!-- STICKY -->
+<div class="sticky" id="sticky" style="display:none;">
+  <div class="sp"><small>Bei ya Leo</small>TZS <span id="stickyAmt">9,999</span></div>
+  <button onclick="openModal()" class="sbtn">📲 Lipa kwa Simu →</button>
+</div>
+
+<!-- MODAL — ZENOPAY STK PUSH -->
+<div class="overlay" id="overlay">
+  <div class="modal">
+    <div class="modal-handle"></div>
+    <h3 id="modalTitle">Lipa kwa Simu Yako 📱</h3>
+    <p class="modal-sub" id="modalSub">Ingiza namba yako — simu italia moja kwa moja!</p>
+
+    <!-- STEP 1: FOMU YA NAMBA -->
+    <div id="payForm">
+      <div style="margin-bottom:14px;">
+        <label style="display:block;font-size:13px;font-weight:600;color:var(--ink2);margin-bottom:7px;">Namba yako ya simu (M-Pesa/Tigo/Airtel):</label>
+        <input type="tel" id="phoneInput" placeholder="Mfano: 0712345678"
+          style="width:100%;padding:14px 16px;background:var(--bg);border:1.5px solid var(--line);
+          border-radius:12px;font-family:'DM Sans',sans-serif;font-size:16px;font-weight:500;
+          color:var(--ink);outline:none;transition:border-color .2s;"
+          oninput="this.style.borderColor='var(--or)'"
+          onkeydown="if(event.key==='Enter')startPayment()"/>
+        <div style="font-size:11px;color:var(--muted);margin-top:5px;">✓ Namba yako salama — inatumika kupokea ombi la malipo tu</div>
+      </div>
+      <div style="padding:12px 14px;background:var(--or-bg);border:1px solid var(--or-bd);border-radius:11px;margin-bottom:16px;font-size:13px;color:var(--ink2);line-height:1.6;">
+        💡 Baada ya kubonyeza — <strong>simu yako italia moja kwa moja.</strong> Ingiza PIN yako tu kukamilisha. Rahisi kama M-Pesa ya kawaida!
+      </div>
+      <button onclick="startPayment()" id="payBtn"
+        style="width:100%;padding:16px;background:linear-gradient(135deg,var(--or),var(--or2));
+        border:none;border-radius:13px;font-family:'DM Sans',sans-serif;font-size:16px;
+        font-weight:700;color:#fff;cursor:pointer;transition:all .2s;box-shadow:0 6px 20px rgba(232,84,10,.3);">
+        📲 Tuma Ombi — TZS <span id="modalPrice">9,999</span>
+      </button>
+    </div>
+
+    <!-- STEP 2: INASUBIRI MALIPO -->
+    <div id="payWaiting" style="display:none;text-align:center;padding:10px 0 20px;">
+      <div style="font-size:48px;margin-bottom:12px;">📳</div>
+      <div style="font-family:'Bricolage Grotesque',sans-serif;font-size:20px;font-weight:800;margin-bottom:8px;">Simu Yako Italia Sasa!</div>
+      <div style="font-size:14px;color:var(--muted);margin-bottom:20px;line-height:1.7;">
+        Angalia simu yako sasa hivi.<br/>
+        Ingiza <strong>PIN yako</strong> kukamilisha malipo ya<br/>
+        <strong style="color:var(--or);font-size:16px;">TZS <span id="waitingPrice">9,999</span></strong>
+      </div>
+      <div style="display:flex;align-items:center;justify-content:center;gap:8px;padding:10px 16px;background:var(--or-bg);border-radius:100px;font-size:13px;color:var(--or);font-weight:600;width:fit-content;margin:0 auto 10px;">
+        <div style="width:8px;height:8px;border-radius:50%;background:var(--or);animation:blink 1s infinite;"></div>
+        Inasubiri malipo yako...
+      </div>
+      <div style="font-size:12px;color:var(--muted);" id="waitTimer">Sekunde 0 zimepita</div>
+    </div>
+
+    <!-- STEP 3: IMEFANIKIWA -->
+    <div id="paySuccess" style="display:none;">
+      <div style="text-align:center;padding:10px 0 16px;">
+        <div style="font-size:52px;margin-bottom:10px;">🎉</div>
+        <div style="font-family:'Bricolage Grotesque',sans-serif;font-size:22px;font-weight:800;color:var(--gn);margin-bottom:6px;">Malipo Yamekamilika!</div>
+        <div style="font-size:13px;color:var(--muted);margin-bottom:18px;">Asante sana! Bundle yako iko tayari kupakiwa sasa hivi.</div>
+      </div>
+      <a href="https://drive.google.com/drive/folders/117yvGXV_j3wHZpdc_6caktAnTQmCysIx?usp=sharing"
+        target="_blank"
+        style="display:flex;align-items:center;justify-content:center;gap:10px;padding:16px;
+        background:var(--gn);border-radius:14px;text-decoration:none;color:#fff;
+        font-size:16px;font-weight:700;margin-bottom:10px;">
+        📂 Fungua Folder — Pakua Bundle Yako Yote
+      </a>
+      <div style="font-size:11px;color:var(--muted);text-align:center;">Folder ina ebooks zako zote + bonuses — pakua unavyotaka</div>
+    </div>
+
+    <!-- STEP 4: TATIZO -->
+    <div id="payError" style="display:none;padding:14px;background:var(--rd-bg);border:1px solid #FCCEC9;border-radius:12px;margin-bottom:14px;">
+      <div style="font-size:13px;font-weight:700;color:var(--rd);margin-bottom:5px;">⚠️ Tatizo limetokea</div>
+      <div style="font-size:12px;color:var(--ink2);line-height:1.5;" id="errorMsg">Jaribu tena au wasiliana nasi.</div>
+      <button onclick="document.getElementById('payError').style.display='none';document.getElementById('payForm').style.display='block';"
+        style="margin-top:10px;padding:8px 16px;background:var(--rd);border:none;border-radius:8px;color:#fff;font-size:12px;font-weight:600;cursor:pointer;">
+        Jaribu Tena
+      </button>
+    </div>
+
+    <div style="display:flex;gap:8px;margin-top:10px;">
+      <button onclick="resetModal()"
+        style="flex:1;padding:12px;background:transparent;border:1.5px solid var(--line);border-radius:11px;color:var(--muted);font-family:'DM Sans',sans-serif;font-size:13px;cursor:pointer;">
+        ← Rudi
+      </button>
+      <button onclick="openWA()"
+        style="flex:1;padding:12px;background:#25D366;border:none;border-radius:11px;font-family:'DM Sans',sans-serif;font-size:13px;font-weight:600;color:#fff;cursor:pointer;">
+        WhatsApp Msaada 💬
+      </button>
+    </div>
+  </div>
+</div>
+
+<script>
+const WA_NUM="255694953087", TOTAL_Q=7;
+let step=0,ans={},cd=599,curEbook=null;
+
+// ── PERSONALIZATION ────────────────────────────────
+const N=()=>ans.name?ans.name.split(' ')[0]:'Rafiki';
+const GW=(m,f)=>ans.gender==='f'?f:m;
+const famCtx=()=>{
+  if(ans.family==='single') return 'ukiwa peke yako';
+  if(ans.family==='married') return 'wewe na mwenzi wako';
+  if(ans.family==='kids') return 'ukiwa unajali familia yako';
+  if(ans.family==='parent') return 'ukiwa mkuu wa familia yako';
+  if(ans.family==='widowed') return 'ukiwa unabeba majukumu yote peke yako';
+  return 'katika hali yako';
+};
+const ageCtx=()=>{
+  if(ans.age==='18-24') return 'ukiwa mdogo na nguvu zote mbele yako';
+  if(ans.age==='25-34') return 'ukiwa katika umri wako bora wa biashara';
+  if(ans.age==='35-44') return 'ukiwa na uzoefu na akili timamu';
+  if(ans.age==='45+') return 'ukiwa na busara ya miaka mingi ya maisha';
+  return 'katika hatua yako ya maisha';
+};
+
+// ── EBOOKS ─────────────────────────────────────────
+const EB={
+  noCapital:{name:"Zero Shilingi, Mapato Makubwa",tag:"Iliyochaguliwa Hasa Kwako",
+    tagline:"Njia 7 zilizothibitishwa za kupata pesa mtandaoni bila kutumia shilingi moja.",
+    bonuses:[{n:"Ebook Kuu: Zero Shilingi, Mapato Makubwa",d:"Mfumo kamili wa kuanza bila pesa",v:"TZS 9,999"},
+      {n:"BONUS #1: Platforms 30+ za Bure Tanzania",d:"Unaanza leo — bila ada yoyote",v:"TZS 7,999"},
+      {n:"BONUS #2: Scripts za Kupata Mteja wa Kwanza",d:"Maneno halisi yanayofanya kazi Tanzania",v:"TZS 9,999"},
+      {n:"BONUS #3: Kalenda ya Siku 30 — Hatua Kwa Hatua",d:"Unajua kufanya nini kila siku bila mkanganyiko",v:"TZS 5,999"}],
+    price:9999,old:32996,slots:9,flw:"#"},
+  unemployed:{name:"Bila Kazi? Bado Una Nguvu — Anza Online",tag:"Iliyochaguliwa Hasa Kwako",
+    tagline:"Huhitaji CV, mahojiano, wala bosi — internet ndiyo ofisi yako ya kweli.",
+    bonuses:[{n:"Ebook Kuu: Bila Kazi? Bado Una Nguvu",d:"Njia 8 za kuanza kupata pesa bila kusubiri ajira",v:"TZS 9,999"},
+      {n:"BONUS #1: Freelancing ya Haraka Tanzania",d:"Pata kazi ya kwanza mtandaoni ndani ya wiki 2",v:"TZS 9,999"},
+      {n:"BONUS #2: Biashara 5 Zinazohitaji Simu tu",d:"Hakuna ofisi, hakuna gharama, hakuna wasiwasi",v:"TZS 7,999"},
+      {n:"BONUS #3: Mindset ya Kupigana — Jiamini Tena",d:"Jenga imani yako tena — hii ndiyo msingi wa kila kitu",v:"TZS 6,999"}],
+    price:9999,old:33996,slots:8,flw:"#"},
+  lowIncome:{name:"Kutoka Mshahara Mdogo Hadi Uhuru wa Pesa",tag:"Iliyochaguliwa Hasa Kwako",
+    tagline:"Mfumo wa kuongeza kipato mara 3 ndani ya miezi 3 — hata ukipata kidogo sana sasa.",
+    bonuses:[{n:"Ebook Kuu: Kutoka Mshahara Mdogo Hadi Uhuru",d:"Njia za kukua pesa hata ukipata kidogo",v:"TZS 9,999"},
+      {n:"BONUS #1: Bajeti ya Siri ya Akiba Haraka",d:"Mfumo wa akiba hata kwa TZS 10,000/mwezi",v:"TZS 6,999"},
+      {n:"BONUS #2: Biashara 5 za Mtaji TZS 20,000",d:"Zimefanya kazi kwa watu 300+ Tanzania",v:"TZS 12,999"},
+      {n:"BONUS #3: Msaada wa Kibinafsi Miezi 3",d:"Maswali yako yote yanajibiwa",v:"TZS 15,000"}],
+    price:9999,old:44997,slots:7,flw:"#"},
+  extraIncome:{name:"Kipato cha Pili: Mfumo wa TZS 500K/Mwezi",tag:"Iliyochaguliwa Hasa Kwako",
+    tagline:"Una kazi? Vizuri. Sasa tunaunda mtiririko wa pesa wa pili unaofanya kazi usiku.",
+    bonuses:[{n:"Ebook Kuu: Mfumo wa Kipato cha Pili",d:"Blueprint kamili ya chanzo cha pili cha pesa",v:"TZS 9,999"},
+      {n:"BONUS #1: Automated Income Masterplan",d:"Weka mfumo mara moja — unafanya kazi milele",v:"TZS 14,999"},
+      {n:"BONUS #2: Affiliate Marketing Tanzania",d:"Uza bila bidhaa yako — pata commission",v:"TZS 9,999"},
+      {n:"BONUS #3: Email List ya Wateja 1,000+",d:"Wateja wanaonunua mara kwa mara",v:"TZS 19,999"}],
+    price:9999,old:54996,slots:13,flw:"#"},
+  student:{name:"Mwanachuo Tajiri: Pesa Kabla ya Kuhitimu",tag:"Iliyochaguliwa Hasa Kwako",
+    tagline:"Anzisha biashara chuoni — utoke na kipato tayari siku ya graduation yako.",
+    bonuses:[{n:"Ebook Kuu: Mwanachuo Tajiri",d:"Mwongozo wa kuanza biashara ukiwa bado chuoni",v:"TZS 9,999"},
+      {n:"BONUS #1: Freelancing Guide kwa Wanachuo",d:"Pata wateja wa kimataifa ukiwa darasani",v:"TZS 7,999"},
+      {n:"BONUS #2: Social Media Money — Simu ni ATM",d:"Geuza followers kuwa pesa halisi",v:"TZS 9,999"},
+      {n:"BONUS #3: Remote Job CV Template",d:"Upate kazi za online zinazolipa dola",v:"TZS 5,999"}],
+    price:9999,old:33996,slots:5,flw:"#"},
+  savings:{name:"Simamia Pesa Yako — Jenga Utajiri wa Kweli",tag:"Iliyochaguliwa Hasa Kwako",
+    tagline:"Siri za kutunza pesa, kukuza pesa, na kuunda utajiri wa muda mrefu — kwa Watanzania.",
+    bonuses:[{n:"Ebook Kuu: Simamia Pesa Yako",d:"Mfumo kamili wa kutunza na kukuza pesa Tanzania",v:"TZS 9,999"},
+      {n:"BONUS #1: Bajeti ya Familia ya Watanzania",d:"Template inayofanya kazi kwa mshahara wowote",v:"TZS 5,999"},
+      {n:"BONUS #2: Uwekezaji wa Kwanza Tanzania",d:"T-Bills, UTT, SACCOS — mwanzo salama",v:"TZS 9,999"},
+      {n:"BONUS #3: Akiba ya Dharura — Mpango wa Miezi 6",d:"Ulinzi dhidi ya msiba, ugonjwa, au kupoteza kazi",v:"TZS 7,999"}],
+    price:9999,old:32996,slots:10,flw:"#"},
+  hopeless:{name:"Simama Tena — Mfumo wa Kuanza Upya Kabisa",tag:"Iliyochaguliwa Hasa Kwako",
+    tagline:"Hata ukiwa umekata tamaa kabisa — hadithi yako bado haijamalizika. Hii ndiyo sura mpya yako.",
+    bonuses:[{n:"Ebook Kuu: Simama Tena — Anza Upya",d:"Hatua 14 za kuamka tena na kuanza safari mpya",v:"TZS 9,999"},
+      {n:"BONUS #1: Hadithi 12 za Watanzania Waliofufuka",d:"Watu waliokuwa hali mbaya kuliko yako — leo wanafanikiwa",v:"TZS 6,999"},
+      {n:"BONUS #2: Njia 5 za Haraka za Pesa Tanzania",d:"Pesa ya kwanza ndani ya siku 7 — imethibitishwa",v:"TZS 9,999"},
+      {n:"BONUS #3: Jiamini Tena — Mindset ya Mpiganaji",d:"Rekebisha fikira — hii ndiyo hatua ya kwanza kabla ya kila kitu",v:"TZS 7,999"}],
+    price:9999,old:32996,slots:3,flw:"#"},
+  noEducation:{name:"Elimu Haitoshi — Ujuzi Ndiyo Unaolipa",tag:"Iliyochaguliwa Hasa Kwako",
+    tagline:"Huhitaji shahada wala darasa — unahitaji ujuzi mmoja na simu. Hii ndiyo elimu ya kweli ya pesa.",
+    bonuses:[{n:"Ebook Kuu: Ujuzi Ndiyo Unaolipa",d:"Skills 10 zinazolipwa bila kuhitaji shahada yoyote",v:"TZS 9,999"},
+      {n:"BONUS #1: Video Tutorials Zote kwa Kiswahili",d:"Kila kitu kinafundishwa kwa Kiswahili rahisi",v:"TZS 9,999"},
+      {n:"BONUS #2: Hatua 0 hadi Pesa — Mwongozo Kamili",d:"Tunaanza pamoja kutoka mwanzo kabisa",v:"TZS 7,999"},
+      {n:"BONUS #3: Msaada wa WhatsApp wa Siku 30",d:"Maswali yako yote yanajibiwa na timu yetu",v:"TZS 6,999"}],
+    price:9999,old:32996,slots:6,flw:"#"},
+};
+
+// ── QUESTIONS ──────────────────────────────────────
+const QS=[
+  // Q1 — JINA
+  {id:"name",type:"name",badge:"Hatua ya 1 — Tuanane Kwanza",
+   title:"Habari! Niambie jina lako:",
+   sub:"Tunataka kuzungumza NAWE — sio kwa mtu wa kawaida. Jina lako linabadilisha kila kitu katika mazungumzo yetu."},
+
+  // Q2 — JINSIA
+  {id:"gender",badge:"Hatua ya 2 — Kukujua",
+   title:"Wewe ni:",
+   sub:"Tunataka kukuandalia maneno yanayokufaa — kwa sababu uzoefu wa mwanamke na mwanaume unaweza kuwa tofauti.",
+   opts:[
+    {e:"👨",t:"Mwanaume",h:"",v:"m"},
+    {e:"👩",t:"Mwanamke",h:"",v:"f"},
+    {e:"🤝",t:"Napendelea kutotaja",h:"",v:"other"},
+  ]},
+
+  // Q3 — UMRI
+  {id:"age",badge:"Hatua ya 3 — Umri Wako",
+   title:"",
+   sub:"Kila umri una fursa zake maalum. Tunataka kukuonyesha inayofaa HASA wakati wako huu.",
+   opts:[
+    {e:"🌱",t:"Miaka 18 – 24",h:"Niko mwanzo wa safari yangu",v:"18-24"},
+    {e:"⚡",t:"Miaka 25 – 34",h:"Niko katikati — natafuta njia",v:"25-34"},
+    {e:"🔥",t:"Miaka 35 – 44",h:"Nina uzoefu — nataka mabadiliko",v:"35-44"},
+    {e:"👑",t:"Miaka 45 na zaidi",h:"Nina busara — nataka kuthibitisha",v:"45+"},
+  ]},
+
+  // Q4 — FAMILIA
+  {id:"family",badge:"Hatua ya 4 — Familia Yako",
+   title:"",
+   sub:"Familia yako ndiyo nguvu yako na sababu yako ya kufanya kazi. Tunataka kuielewa.",
+   opts:[
+    {e:"🧑",t:"Mimi peke yangu",h:"Bado sijaoa / sijaolewa",v:"single"},
+    {e:"💑",t:"Nimeoa / Nimeolewa",h:"Mimi na mwenzi wangu",v:"married"},
+    {e:"👨‍👩‍👧‍👦",t:"Nina watoto ninaowatunza",h:"Familia yangu inategemea mimi",v:"kids"},
+    {e:"🦸",t:"Mimi ndiye mkuu wa familia",h:"Wazazi / ndugu wanategemea mimi",v:"parent"},
+    {e:"💪",t:"Mimi peke yangu — baada ya msiba",h:"Ninaendelea na nguvu zangu mwenyewe",v:"widowed"},
+  ]},
+
+  // Q5 — HALI YA PESA / CATEGORY
+  {id:"cat",badge:"Hatua ya 5 — Hali Yako Sasa",
+   title:"",
+   sub:"Jibu kwa uaminifu kabisa — hakuna jibu baya. Jibu lako ndilo linalotuambia jinsi ya kukusaidia vizuri zaidi.",
+   opts:[
+    {e:"🔍",t:"Sina kazi — natafuta njia yoyote",h:"Ninahitaji kipato haraka iwezekanavyo",v:"unemployed"},
+    {e:"🪙",t:"Sina mtaji wowote",h:"Nataka kuanza bila pesa — kutoka sifuri",v:"noCapital"},
+    {e:"💼",t:"Nina mshahara mdogo",h:"Pesa haitoshi — nataka zaidi",v:"lowIncome"},
+    {e:"⚡",t:"Natafuta kipato cha ziada",h:"Nina kazi — lakini nataka chanzo kingine",v:"extraIncome"},
+    {e:"🎓",t:"Mimi ni mwanachuo",h:"Bado nasoma — nataka kuanza sasa",v:"student"},
+    {e:"💰",t:"Nataka kujifunza kutunza pesa",h:"Nina pesa lakini inakimbia — sijui kuitunza",v:"savings"},
+    {e:"📵",t:"Sijasoma sana au sijui teknolojia",h:"Lakini ninataka kujifunza — niko tayari",v:"noEducation"},
+    {e:"😔",t:"Nimekata tamaa — lakini niko hapa",h:"Nimejaribu mengi hayakufanya kazi",v:"hopeless"},
+  ]},
+
+  // Q6 — KIZUIZI
+  {id:"obstacle",badge:"Hatua ya 6 — Kizuizi Chako",
+   title:"",
+   sub:"Jibu hili linabainisha bonus maalum tutakayokupa BURE — iliyoundwa hasa kushinda kizuizi chako.",
+   opts:[
+    {e:"😕",t:"Sijui pa kuanzia — ninakanganyika",h:"Taarifa nyingi mno, sijui ya kweli na uongo",v:"lost"},
+    {e:"😰",t:"Ninaogopa kushindwa tena",h:"Nimejaribu — iliumiza — ninaogopa kurudia",v:"fear"},
+    {e:"⏰",t:"Sina muda — maisha yangu yameshajaa",h:"Kazi, familia, majukumu — hakuna nafasi",v:"time"},
+    {e:"📱",t:"Sijui teknolojia vizuri",h:"Simu na internet — sijui kutumia vizuri",v:"tech"},
+    {e:"🤑",t:"Nimewahi kudanganywa na 'make money online'",h:"Niliamini — nikapoteza pesa — siniamini tena",v:"scammed"},
+    {e:"💔",t:"Hakuna anayenisaidia au kuniamini",h:"Peke yangu — familia haioni mwelekeo",v:"alone"},
+  ]},
+
+  // Q7 — MAELEZO (HIARI)
+  {id:"describe",type:"textarea",badge:"Hatua ya 7 — Maneno Yako (Hiari)",
+   title:"",sub:"Hii ni nafasi yako kusema kila kitu. Tutakapopendekeza suluhisho lako, tutakuwa tunaelewa hali yako ya kweli.",
+   placeholder:""},
+];
+
+// ── TICKERS ────────────────────────────────────────
+const liveM=["Mtu kutoka Dar es Salaam amenunua dakika 3 zilizopita","Kijana kutoka Mwanza amenunua sasa hivi — ameanza safari yake","Mama kutoka Arusha amepata ebook yake — anaanza leo","Mtu aliyekuwa bila kazi Dodoma amejiunga sasa hivi","Mwanachuo kutoka Zanzibar amenunua ebook yake"];
+const bannerM=["Njia zilizothibitishwa za kutengeneza pesa mtandaoni — Tanzania","Ofa hii inaisha leo usiku wa manane — Usikose","Ebooks 8 + Bonuses 24 — Suluhisho lako la kibinafsi linakusubiri","Watu 2,400+ wa Tanzania wameshathibitisha mfumo huu"];
+let li=0,bi=0;
+setInterval(()=>{li=(li+1)%liveM.length;const el=document.getElementById('liveMsg');if(!el)return;el.style.opacity=0;setTimeout(()=>{el.textContent=liveM[li];el.style.opacity=1;},300);},5500);
+setInterval(()=>{bi=(bi+1)%bannerM.length;const el=document.getElementById('bannerMsg');if(!el)return;el.style.opacity=0;setTimeout(()=>{el.textContent=bannerM[bi];el.style.opacity=1;},300);},7000);
+function fmt(s){const m=Math.floor(s/60),sec=s%60;return`${String(m).padStart(2,'0')}:${String(sec).padStart(2,'0')}`;}
+setInterval(()=>{if(cd>0)cd--;const el=document.getElementById('cdTimer');if(el)el.textContent=fmt(cd);},1000);
+
+function updateProg(){
+  const pct=Math.round((step/TOTAL_Q)*100);
+  document.getElementById('progFill').style.width=pct+'%';
+  document.getElementById('progPct').textContent=pct+'%';
+  document.getElementById('progLabel').textContent=step<QS.length?`Hatua ${step+1} / ${QS.length}`:`${N()}, Suluhisho Lako Liko Tayari!`;
+  const wrap=document.getElementById('progSteps');
+  wrap.innerHTML='';
+  for(let i=0;i<TOTAL_Q;i++){const d=document.createElement('div');d.className='ps'+(i<step?' done':i===step?' active':'');wrap.appendChild(d);}
+}
+
+function getDynTitle(id){
+  const n=N();
+  if(id==='age') return `${n}, una umri gani?`;
+  if(id==='family') return `${n}, familia yako ni ipi?`;
+  if(id==='cat') return `${n}, hali yako ya pesa sasa hivi ni ipi?`;
+  if(id==='obstacle') return `${n}, nini kinakuzuia usifanikiwe?`;
+  if(id==='describe') return `${n}, niambie zaidi kuhusu hali yako (hiari):`;
+  return '';
+}
+
+function render(){
+  updateProg();
+  document.getElementById('sticky').style.display='none';
+  if(step<QS.length) renderQ(QS[step]);
+  else if(!ans.package) renderPricing();
+  else renderOffer();
+}
+
+// ── BACK NAVIGATION ───────────────────────────────
+function goBack(){
+  if(ans.package){ delete ans.package; curEbook=null; renderPricing(); }
+  else if(step===0){ /* mwanzo kabisa */ }
+  else { step--; render(); }
+}
+
+// ── PRICING PAGE ──────────────────────────────────
+function renderPricing(){
+  const cat=ans.cat||'extraIncome', eb=EB[cat]||EB.extraIncome, n=N();
+  const recNames={
+    noCapital:"Muongozo wa Siku 30 — Kutoka Sifuri",
+    unemployed:"Muongozo wa Siku 30 — Anza Online Leo",
+    lowIncome:"Muongozo wa Siku 30 — Kipato cha Ziada",
+    extraIncome:"Muongozo wa Siku 30 — Passive Income",
+    student:"Muongozo wa Siku 30 — Pesa Ukiwa Chuoni",
+    savings:"Muongozo wa Siku 30 — Simamia Pesa",
+    hopeless:"Muongozo wa Siku 30 — Anza Upya",
+    noEducation:"Muongozo wa Siku 30 — Ujuzi Unaolipa",
+  };
+  const whyRecs={
+    noCapital:"Unahitaji mfumo wa hatua kwa hatua — bila mtaji wowote",
+    unemployed:"Unahitaji kipato haraka — bila CV wala mahojiano",
+    lowIncome:"Unahitaji chanzo cha pili sambamba na kazi yako ya sasa",
+    extraIncome:"Unahitaji mfumo unaofanya kazi hata ukisinzia",
+    student:"Unahitaji kipato bila kuathiri masomo yako chuoni",
+    savings:"Unahitaji mfumo wa akiba na chanzo kipya cha kipato",
+    hopeless:"Unahitaji njia mpya — iliyo wazi, rahisi, na ya uhakika",
+    noEducation:"Unahitaji skills za haraka — zinazolipa bila shahada",
+  };
+  const recName=recNames[cat]||recNames.extraIncome;
+  const whyRec=whyRecs[cat]||whyRecs.extraIncome;
+  const card=document.getElementById('card');
+  card.style.animation='none'; card.offsetHeight; card.style.animation='up .4s ease';
+  card.innerHTML=`
+    <button onclick="goBack()" style="display:inline-flex;align-items:center;gap:5px;
+      background:none;border:none;color:var(--muted);font-family:'DM Sans',sans-serif;
+      font-size:13px;cursor:pointer;padding:0;margin-bottom:18px;">
+      ← Rudi nyuma
+    </button>
+
+    <div class="badge">✦ Mapendekezo Yako — ${n}</div>
+    <h2 style="font-size:clamp(17px,4vw,22px);margin-bottom:6px;line-height:1.25;">
+      Kutokana na majibu yako, napendekeza hii:
+    </h2>
+    <p class="sub" style="margin-bottom:22px;font-size:13px;">${whyRec}. Chagua muundo unaokufaa:</p>
+
+    <!-- ═══ MINI PACKAGE ════════════════════════════ -->
+    <div id="pkg-mini" onclick="selectPkg('mini')" style="border:2.5px solid var(--or);
+      background:var(--or-bg);border-radius:16px;padding:20px;margin-bottom:10px;
+      cursor:pointer;position:relative;transition:all .18s;">
+      <div style="position:absolute;top:-12px;left:16px;background:var(--or);color:#fff;
+        font-size:10px;font-weight:700;padding:3px 12px;border-radius:100px;letter-spacing:.07em;">
+        ⭐ INAPENDEKEZWA KWAKO
+      </div>
+      <div style="display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:14px;">
+        <div style="flex:1;">
+          <div style="font-size:10px;font-weight:700;color:var(--or);letter-spacing:.08em;text-transform:uppercase;margin-bottom:4px;">MINI PACKAGE</div>
+          <div style="font-family:'Bricolage Grotesque',sans-serif;font-size:16px;font-weight:800;color:var(--ink);line-height:1.2;">📘 ${recName}</div>
+        </div>
+        <div style="text-align:right;flex-shrink:0;margin-left:12px;">
+          <div style="font-size:11px;color:var(--muted);text-decoration:line-through;">TZS 25,000</div>
+          <div style="font-family:'Bricolage Grotesque',sans-serif;font-size:28px;font-weight:800;color:var(--or);line-height:1;">9,999</div>
+          <div style="font-size:10px;color:var(--muted);">TZS leo tu</div>
+        </div>
+      </div>
+      <div style="background:rgba(255,255,255,.75);border-radius:10px;padding:12px 14px;margin-bottom:12px;">
+        <div style="font-size:10px;font-weight:700;color:var(--or);margin-bottom:8px;text-transform:uppercase;letter-spacing:.06em;">Unachopata:</div>
+        ${['<strong>Mwongozo Kamili wa Siku 30</strong> — hatua kwa hatua kila siku',
+           '<strong>Bonuses 3 za Msingi</strong> — Scripts, Platforms 30+, Kalenda',
+           '<strong>Download moja kwa moja</strong> — Google Drive folder',
+           '<strong>Dhamana ya Siku 30</strong> — pesa yako salama kabisa']
+          .map(t=>`<div style="display:flex;gap:8px;font-size:13px;color:var(--ink2);margin-bottom:5px;">
+            <span style="color:var(--or);font-weight:700;flex-shrink:0;">✓</span><span>${t}</span></div>`).join('')}
+      </div>
+      <div style="font-size:12px;color:var(--or);font-weight:600;">🎯 Inafaa kwa: Wanaoanza — mfumo rahisi na wa haraka</div>
+      <div id="chk-mini" style="display:none;margin-top:12px;padding:8px 12px;
+        background:var(--or);border-radius:8px;color:#fff;font-size:13px;font-weight:700;text-align:center;">
+        ✓ Umechagua Mini Package — TZS 9,999
+      </div>
+    </div>
+
+    <!-- ═══ FULL PACKAGE ════════════════════════════ -->
+    <div id="pkg-full" onclick="selectPkg('full')" style="border:2.5px solid var(--line);
+      background:var(--white);border-radius:16px;padding:20px;margin-bottom:20px;
+      cursor:pointer;position:relative;transition:all .18s;">
+      <div style="display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:14px;">
+        <div style="flex:1;">
+          <div style="font-size:10px;font-weight:700;color:var(--ink2);letter-spacing:.08em;text-transform:uppercase;margin-bottom:4px;">FULL PACKAGE</div>
+          <div style="font-family:'Bricolage Grotesque',sans-serif;font-size:16px;font-weight:800;color:var(--ink);line-height:1.2;">📦 ${eb.name} — Kamili</div>
+        </div>
+        <div style="text-align:right;flex-shrink:0;margin-left:12px;">
+          <div style="font-size:11px;color:var(--muted);text-decoration:line-through;">TZS 45,000</div>
+          <div style="font-family:'Bricolage Grotesque',sans-serif;font-size:28px;font-weight:800;color:var(--ink);line-height:1;">12,999</div>
+          <div style="font-size:10px;color:var(--muted);">TZS leo tu</div>
+        </div>
+      </div>
+      <div style="background:#F7F6F2;border-radius:10px;padding:12px 14px;margin-bottom:10px;">
+        <div style="font-size:10px;font-weight:700;color:var(--ink);margin-bottom:8px;text-transform:uppercase;letter-spacing:.06em;">Kila kitu cha Mini + ZAIDI:</div>
+        ${['<strong>Ebooks Zote 8</strong> — mada zote za kufanya pesa Tanzania',
+           '<strong>Bonuses 10 Kamili</strong> — Hadithi, Mindset, Automation, Mitego...',
+           '<strong>Njia Zote 4</strong> — Freelancing, Dropshipping, Content, Affiliate',
+           '<strong>Thamani TZS 45,000+</strong> — unapata kwa TZS 12,999 tu']
+          .map(t=>`<div style="display:flex;gap:8px;font-size:13px;color:var(--ink2);margin-bottom:5px;">
+            <span style="color:var(--gn);font-weight:700;flex-shrink:0;">✓</span><span>${t}</span></div>`).join('')}
+      </div>
+      <div style="padding:10px 12px;background:linear-gradient(135deg,#E8F5F0,#F0FAF5);
+        border:1px solid #B0DDD0;border-radius:10px;font-size:12px;color:var(--gn);font-weight:600;">
+        💡 Tofauti na Mini: Ebooks 8 badala ya 1 + Bonuses 10 badala ya 3 — kwa TZS 3,000 zaidi tu
+      </div>
+      <div style="font-size:12px;color:var(--muted);font-weight:600;margin-top:10px;">
+        🎯 Inafaa kwa: Wanaotaka kila kitu — mfumo kamili bila upungufu
+      </div>
+      <div id="chk-full" style="display:none;margin-top:12px;padding:8px 12px;
+        background:var(--ink);border-radius:8px;color:#fff;font-size:13px;font-weight:700;text-align:center;">
+        ✓ Umechagua Full Package — TZS 12,999
+      </div>
+    </div>
+
+    <!-- CTA -->
+    <button id="pkgBtn" onclick="confirmPkg()" disabled style="width:100%;padding:16px;
+      background:var(--line);border:none;border-radius:13px;font-family:'DM Sans',sans-serif;
+      font-size:16px;font-weight:700;color:var(--muted);cursor:not-allowed;transition:all .25s;">
+      Chagua muundo kwanza ↑
+    </button>
+    <div style="display:flex;align-items:center;justify-content:center;gap:6px;
+      margin-top:12px;font-size:12px;color:var(--muted);">
+      📂 Pakiti zote mbili — Google Drive folder moja, pakua yote
+    </div>`;
+}
+
+let selectedPkg=null;
+function selectPkg(pkg){
+  selectedPkg=pkg;
+  const mini=document.getElementById('pkg-mini');
+  const full=document.getElementById('pkg-full');
+  const chkM=document.getElementById('chk-mini');
+  const chkF=document.getElementById('chk-full');
+  const btn=document.getElementById('pkgBtn');
+  if(pkg==='mini'){
+    mini.style.border='2.5px solid var(--or)'; mini.style.background='var(--or-bg)';
+    full.style.border='2.5px solid var(--line)'; full.style.background='var(--white)';
+    chkM.style.display='block'; chkF.style.display='none';
+    btn.textContent='Endelea na Mini — TZS 9,999 →';
+    btn.style.background='linear-gradient(135deg,var(--or),var(--or2))';
+    btn.style.color='#fff'; btn.style.cursor='pointer'; btn.disabled=false;
+  } else {
+    full.style.border='2.5px solid var(--ink)'; full.style.background='#F2F1ED';
+    mini.style.border='2.5px solid var(--line)'; mini.style.background='var(--white)';
+    chkF.style.display='block'; chkM.style.display='none';
+    btn.textContent='Endelea na Full — TZS 12,999 →';
+    btn.style.background='var(--ink)'; btn.style.color='#fff';
+    btn.style.cursor='pointer'; btn.disabled=false;
+  }
+}
+
+function confirmPkg(){
+  if(!selectedPkg) return;
+  const cat=ans.cat||'extraIncome', eb=EB[cat]||EB.extraIncome;
+  ans.package=selectedPkg;
+  curEbook={...eb, price:selectedPkg==='mini'?9999:12999, old:selectedPkg==='mini'?25000:45000};
+  renderOffer();
+}
+
+function renderQ(q){
+  const card=document.getElementById('card');
+  card.style.animation='none';card.offsetHeight;card.style.animation='up .4s ease';
+  document.getElementById('sticky').classList.remove('show');
+  const chk=`<svg class="chk-i" width="10" height="8" viewBox="0 0 10 8" fill="none"><path d="M1 4L3.5 6.5L9 1" stroke="white" stroke-width="2" stroke-linecap="round"/></svg>`;
+  const title=q.title||getDynTitle(q.id);
+
+  if(q.type==='name'){
+    card.innerHTML=`
+      ${step>0?`<button onclick="goBack()" style="display:inline-flex;align-items:center;gap:5px;background:none;border:none;color:var(--muted);font-family:'DM Sans',sans-serif;font-size:13px;cursor:pointer;padding:0;margin-bottom:16px;">← Rudi nyuma</button>`:''}
+      <div class="badge">✦ ${q.badge}</div>
+      <h2>${q.title}</h2>
+      <p class="sub">${q.sub}</p>
+      <div class="name-wrap">
+        <label>Jina lako la kwanza au kamili:</label>
+        <input type="text" id="nameInp" placeholder="Mfano: Amina, John, au Fatuma Msangi" maxlength="50"
+          oninput="document.getElementById('nBtn').disabled=!this.value.trim()"
+          onkeydown="if(event.key==='Enter'&&this.value.trim())subName()"/>
+      </div>
+      <button class="btn btn-dark" id="nBtn" onclick="subName()" disabled>Endelea →</button>`;
+    setTimeout(()=>document.getElementById('nameInp')?.focus(),200);
+
+  } else if(q.type==='textarea'){
+    // Motivational message before textarea based on obstacle
+    const motivMsg={
+      scammed:`${N()}, nakusikia. Kudanganywa kunaumiza sana — na kuelewa kwa nini unahisi hivi. Lakini hii ni tofauti. Simu yako iko hapa, kwa sababu ndani yako bado kuna moto wa kutaka kujibadilisha.`,
+      hopeless:`${N()}, ukweli mkubwa: watu wengi wanaofanikiwa leo walikuwa pale ulipo sasa. Waliona giza. Walichoka. Lakini walisimama mara moja zaidi. Hiyo mara moja iliibadilisha kila kitu.`,
+      alone:`${N()}, sikiliza — wewe si peke yako. Familia yako haioni mwelekeo kwa sababu haijui bado. Utakapofanikiwa, ndipo wataona. Kazi yako ni kuthibitisha — sio kuwashawishi.`,
+      fear:`${N()}, hofu yako ni ya kawaida kabisa. Kila mtu aliyefanikiwa online alikuwa na hofu hiyo hiyo. Tofauti yao ni moja tu — walichukua hatua NDOGO moja licha ya hofu.`,
+    }[ans.obstacle]||`${N()}, umefika hatua ya mwisho. Tutakuandalia suluhisho linalofaa hali yako ya ${ageCtx()} ${famCtx()}.`;
+
+    card.innerHTML=`
+      <div class="badge">✦ ${q.badge}</div>
+      <h2>${title}</h2>
+      <p class="sub">${q.sub}</p>
+      <div class="greeting">
+        <div class="greeting-emoji">${ans.gender==='f'?'👩':'👨'}</div>
+        <h3>Asante, ${N()}! Umefika hatua ya mwisho.</h3>
+        <p>${motivMsg}</p>
+      </div>
+      <div class="ta-wrap">
+        <div class="ta-lbl"><span>Niambie kwa maneno yako mwenyewe:</span><span class="optional">HIARI</span></div>
+        <textarea id="ftxt" placeholder="Mfano: Mimi ni ${N()}, ${ageCtx()}, ${famCtx()}. Hali yangu ni hivi..." maxlength="500"
+          oninput="document.getElementById('cc').textContent=this.value.length"></textarea>
+        <div class="char-c"><span id="cc">0</span>/500</div>
+      </div>
+      <button class="btn btn-or" onclick="subText()">Nionyeshe Suluhisho Langu →</button>
+      <button class="btn btn-ghost" onclick="skipText()">Ruka Swali Hili →</button>`;
+
+  } else {
+    const useGrid=q.opts&&q.opts.length<=4;
+
+    // Add motivational context after sub for key questions
+    let motivHtml='';
+    if(q.id==='cat'){
+      motivHtml=`<div class="motiv-box dark" style="margin-bottom:18px;">
+        <div class="mb-q light">Ukweli ambao hakuna mtu anayukuambia:</div>
+        <p class="light">Simu unayoshikilia sasa hivi — hata ile ya bei ya chini — ina nguvu ya kukupata TZS 100,000+ kwa mwezi. Jibu swali hili kwa uaminifu na tutakuonyesha HASA jinsi ya kufanya hivyo kwa hali yako.</p>
+      </div>`;
+    }
+    if(q.id==='obstacle'){
+      motivHtml=`<div class="motiv-box orange" style="margin-bottom:18px;">
+        <div class="mb-q orange">Kizuizi chako ni zawadi yako:</div>
+        <p class="dark">Kila mtu ana kizuizi. Watu wanaofanikiwa hawana kizuizi kidogo zaidi — wana mfumo wa kukishinda. Tuambie chako — tutakupa silaha yake maalum BURE.</p>
+      </div>`;
+    }
+
+    const optsHtml=q.opts.map((o,i)=>`
+      <div class="opt" id="opt${i}" onclick="pick(${i},'${o.v}')">
+        <div class="opt-e">${o.e}</div>
+        <div class="opt-body">
+          <div class="opt-t">${o.t}</div>
+          ${o.h?`<div class="opt-h">${o.h}</div>`:''}
+        </div>
+        <div class="opt-chk">${chk}</div>
+      </div>`).join('');
+
+    card.innerHTML=`
+      <div class="badge">✦ ${q.badge}</div>
+      <h2>${title}</h2>
+      <p class="sub">${q.sub}</p>
+      ${motivHtml}
+      <div class="${useGrid?'opts-grid':'opts'}">${optsHtml}</div>
+      <button class="btn btn-dark" id="nxtBtn" onclick="next()" disabled>Endelea →</button>`;
+  }
+}
+
+function subName(){
+  const v=document.getElementById('nameInp').value.trim();
+  if(!v)return;
+  ans.name=v;step++;render();
+}
+function pick(i,v){
+  document.querySelectorAll('.opt').forEach((el,j)=>el.classList.toggle('sel',j===i));
+  ans[QS[step].id]=v;
+  document.getElementById('nxtBtn').disabled=false;
+}
+function next(){step++;render();}
+function subText(){ans.describe=document.getElementById('ftxt').value;step++;render();}
+function skipText(){step++;render();}
+
+// ── OFFER ──────────────────────────────────────────
+function renderOffer(){
+  const cat = ans.cat || 'extraIncome';
+  const eb  = curEbook || EB[cat] || EB.extraIncome;
+  curEbook  = eb;
+  const saved=eb.old-eb.price;
+  const savePct=Math.round((saved/eb.old)*100);
+  const totalVal=eb.bonuses.reduce((a,b)=>a+parseInt(b.v.replace(/[^0-9]/g,'')),0);
+  const n=N();
+
+  // Personalized headline
+  const personalHeadline={
+    unemployed:`${n}, huhitaji CV wala mahojiano — internet ndiyo ofisi yako mpya.`,
+    noCapital:`${n}, shilingi sifuri ya mtaji — lakini nguvu yako ndiyo mtaji wako mkubwa.`,
+    lowIncome:`${n}, mshahara mdogo si laana — ni mwanzo tu wa hadithi yako nzuri.`,
+    extraIncome:`${n}, kazi yako iendelee — sasa tunaunda mto wa pesa unaofanya kazi usiku.`,
+    student:`${n}, darasa lako leo — biashara yako kesho. Anza sasa ukiwa bado chuoni.`,
+    savings:`${n}, pesa inakimbia kwa sababu mfumo bado haujasimama — leo tunauweka.`,
+    hopeless:`${n}, hadithi yako bado haijamalizika — hii ndiyo sura yake mpya na ya nguvu zaidi.`,
+    noEducation:`${n}, shahada haitoshi — ujuzi ndiyo unaolipa. Na ujuzi unajifunzika.`,
+  }[cat]||`${n}, ${ageCtx()} ${famCtx()} — hii ndiyo njia iliyoundwa HASA kwako.`;
+
+  const obstacleBonus={
+    lost:"🎯 BONUS MAALUM: Mwongozo wa Dakika 15 — Hatua Ya Kwanza (wanaoanza kabisa)",
+    fear:"💪 BONUS MAALUM: Hadithi 10 za Watanzania Waliofanikiwa Kutoka Sifuri Kabisa",
+    time:"⚡ BONUS MAALUM: Mfumo wa Dakika 30/Siku — Biashara Sambamba na Maisha Yako",
+    tech:"📱 BONUS MAALUM: Video Tutorials Zote kwa Kiswahili Rahisi — Hatua Kwa Hatua",
+    scammed:"🛡️ BONUS MAALUM: Orodha ya Mitego 10 ya Kudanganya Online — Jilinde Milele",
+    alone:"🤝 BONUS MAALUM: Kikundi cha Msaada cha Watanzania — Familia Yako Mpya",
+  }[ans.obstacle]||"🎁 BONUS MAALUM: Msaada wa Kibinafsi wa WhatsApp — Siku 30";
+
+  const bonusHtml=eb.bonuses.map((b,i)=>`
+    <div class="bitem">
+      <div class="bnum">${i+1}</div>
+      <div class="bbody"><div class="bname">${b.n}</div><div class="bdesc">${b.d}</div></div>
+      <div class="bval">${b.v} BURE</div>
+    </div>`).join('');
+
+  // Personalized reviews
+  const reviewsByCategory={
+    unemployed:[
+      {t:`"Nilikuwa bila kazi miezi 8. Nilisoma ebook hii, nikaanza freelancing. Wiki 3 baadaye nilifanya TZS 120,000 ya kwanza. Hakuna maneno ya kuelezea hisia hiyo."`,n:"— Peter K., Dar es Salaam"},
+      {t:`"Vijana hawaamini inawezekana. Mimi nilikuamini. Leo nina kazi yangu mwenyewe — online — na simalipwi na mtu."`,n:"— Baraka M., Mwanza"},
+    ],
+    hopeless:[
+      {t:`"Nilikuwa nimekata tamaa kabisa — nilifikiri nimeshindwa. Ebook hii haikubadilisha tu biashara yangu — ilibadilisha jinsi ninavyojiona mwenyewe."`,n:"— Grace T., Arusha"},
+      {t:`"Nilijaribu mambo mengi yaliyonidanganya. Hii ilikuwa tofauti. Kweli ilifanya kazi."`,n:"— Hassan J., Dodoma"},
+    ],
+  }[cat]||[
+    {t:`"Nilianza bila chochote. Wiki 3 baadaye nilifanya TZS 85,000 ya kwanza. Sielewi kwa nini nilichelewa muda mrefu hivyo."`,n:"— Fatuma M., Dar es Salaam"},
+    {t:`"Nilikuwa nafikiri ni uongo kama wengine. Lakini niliamua kujaribu. Sasa nina wateja 4 wa kudumu. Asante sana!"`,n:"— Emmanuel K., Mwanza"},
+    {t:`"Kama mwanachuo bila pesa, hii ilinisaidia kuanza. Nilifanya TZS 150,000 kabla ya mwisho wa mwezi wa kwanza."`,n:"— Amina S., Arusha"},
+  ];
+
+  const reviewHtml=reviewsByCategory.map((r,i)=>{
+    const initials=r.n.replace('— ','').split(' ').slice(0,2).map(w=>w[0]||'').join('').toUpperCase()||'TZ';
+    const results={
+      unemployed:['TZS 120,000 mwezi wa kwanza','Sasa ana wateja 3 wa kudumu'],
+      noCapital:['TZS 85,000 wiki 3 baadaye','Ameacha kuomba msaada'],
+      lowIncome:['Kipato kimeongezeka mara 2','Anaweza kulipa kodi bila stress'],
+      hopeless:['Ameanza upya baada ya miaka 2','Familia inamwona tofauti leo'],
+    }[cat]||['TZS 85,000 mwezi wa kwanza','Sasa anafanya kazi yake mwenyewe'];
+    return `
+    <div class="rev">
+      <div class="rev-header">
+        <div class="rev-avatar">${initials}</div>
+        <div class="rev-meta">
+          <div class="rev-name">${r.n.replace('— ','')}</div>
+          <div class="rev-loc">${['Dar es Salaam','Mwanza','Arusha','Dodoma','Zanzibar'][i%5]}, Tanzania</div>
+        </div>
+        <div class="rev-stars">★★★★★</div>
+      </div>
+      <div class="rev-text">${r.t}</div>
+      <div class="rev-result">✓ ${results[i%results.length]}</div>
+    </div>`}).join('');
+
+  const card=document.getElementById('card');
+  card.style.animation='none';card.offsetHeight;card.style.animation='up .4s ease';
+  card.innerHTML=`
+    <button onclick="goBack()" style="display:inline-flex;align-items:center;gap:5px;
+      background:none;border:none;color:var(--muted);font-family:'DM Sans',sans-serif;
+      font-size:13px;cursor:pointer;padding:0;margin-bottom:16px;">
+      ← Badilisha package
+    </button>
+
+    <div class="offer-header">
+      <div class="offer-eyebrow">★ Suluhisho Lako la Kibinafsi — ${n}</div>
+      <h2>${personalHeadline}</h2>
+      <p class="sub">Tulichunguza majibu yako yote na kukuandalia hii hasa kwako.</p>
+    </div>
+
+    <div class="urgency"><div class="urg-l">⏰ Bei hii inaisha baada ya:</div>
+    <div class="cdown" id="cdTimer">${fmt(cd)}</div></div>
+
+    <div class="scarcity">
+      <span style="color:var(--or);font-weight:600;white-space:nowrap">Nakala ${eb.slots} tu:</span>
+      <div class="sc-bar"><div class="sc-fill" style="width:${100-eb.slots*3.5}%"></div></div>
+      <span class="sc-t">${eb.slots}/25 zimebaki</span>
+    </div>
+
+    <div class="product">
+      <div class="pt">
+        <div class="pt-lbl">✦ ${eb.tag}</div>
+        <div class="pt-name">${eb.name}</div>
+        <div class="pt-tag">${eb.tagline}</div>
+      </div>
+
+      <!-- MODULES 5 -->
+      <div class="bwrap">
+        <div class="btitle">📚 Muundo wa Mpango — Hatua Kwa Hatua:</div>
+        <div class="blist">
+
+          <div class="bitem" style="border-left:4px solid var(--or);background:var(--or-bg);">
+            <div class="bnum" style="background:var(--or);font-size:10px;">M1</div>
+            <div class="bbody">
+              <div class="bname">🧠 MODULE 1 — Chagua Njia Sahihi (Usipoteze Muda)</div>
+              <div class="bdesc">Kwa nini watu wengi wanashindwa. Njia 3 peke yake zinazofanya kazi kwa wanaoanza. Unachagua moja inayofaa hali yako.</div>
+              <div style="font-size:11px;color:var(--or);font-weight:700;margin-top:5px;">👉 Matokeo: Unaelewa wapi unaenda — hakuna mkanganyiko</div>
+            </div>
+          </div>
+
+          <div class="bitem" style="border-left:4px solid #1A56DB;">
+            <div class="bnum" style="background:#1A56DB;font-size:10px;">M2</div>
+            <div class="bbody">
+              <div class="bname">💼 MODULE 2 — Pata Kitu cha Kuuza (Leo Hivi)</div>
+              <div class="bdesc">Nini kuuza bila mtaji. Unapataje bila kununua. Jinsi ya kukiwasilisha ili watu watake kununua.</div>
+              <div style="font-size:11px;color:#1A56DB;font-weight:700;margin-top:5px;">👉 Matokeo: Una bidhaa ya kweli tayari ya kuuza</div>
+            </div>
+          </div>
+
+          <div class="bitem" style="border-left:4px solid var(--gn);">
+            <div class="bnum" style="background:var(--gn);font-size:10px;">M3</div>
+            <div class="bbody">
+              <div class="bname">📲 MODULE 3 — Kupata Wateja Bila Matangazo</div>
+              <div class="bdesc">WhatsApp Status strategy inayofanya kazi. Facebook groups bila kutumia pesa. TikTok ya msingi kwa wanaoanza.</div>
+              <div style="font-size:11px;color:var(--gn);font-weight:700;margin-top:5px;">👉 Matokeo: Watu wanakuona — bila kulipa hata senti</div>
+            </div>
+          </div>
+
+          <div class="bitem" style="border-left:4px solid var(--pu);">
+            <div class="bnum" style="background:var(--pu);font-size:10px;">M4</div>
+            <div class="bbody">
+              <div class="bname">🧾 MODULE 4 — Scripts Kamili za Mazungumzo</div>
+              <div class="bdesc">Ujumbe wa kuanzisha mazungumzo. Ujumbe wa kutoa ofa. Ujumbe wa kufunga mauzo. Copy, paste, tuma.</div>
+              <div style="font-size:11px;color:var(--pu);font-weight:700;margin-top:5px;">👉 Matokeo: Hofu inaenda — unajua kusema nini</div>
+            </div>
+          </div>
+
+          <div class="bitem" style="border-left:4px solid var(--go);">
+            <div class="bnum" style="background:var(--go);font-size:10px;">M5</div>
+            <div class="bbody">
+              <div class="bname">📅 MODULE 5 — Mpango wa Siku 30 (Siku Kwa Siku)</div>
+              <div class="bdesc">Siku 1: Setup. Siku 2: Pata bidhaa. Siku 3: Post ya kwanza. Kila siku unajua kufanya nini — bila kufikiri.</div>
+              <div style="font-size:11px;color:var(--go);font-weight:700;margin-top:5px;">👉 Matokeo: Unatekeleza bila kukanganyika</div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+      <!-- BONUSES -->
+      <div class="bwrap" style="background:linear-gradient(135deg,#FFF8EC,#FFFDF5);border-top:1px solid var(--line);">
+        <div class="btitle">🎁 Bonuses — Zinafanya Ofa Kuwa Isiyoweza Kukataliwa:</div>
+        <div class="blist">
+
+          <div class="bitem" style="background:#fff;border-color:var(--go-bg);">
+            <div class="bnum" style="background:var(--go);">★</div>
+            <div class="bbody">
+              <div class="bname" style="color:var(--go);">Checklist ya Kuanza Leo Hivi</div>
+              <div class="bdesc">Hatua 10 za kufanya siku ya kwanza — tick moja kwa moja. Usikae ukiuliza "nianze wapi."</div>
+            </div>
+            <div class="bval">BURE</div>
+          </div>
+
+          <div class="bitem" style="background:#fff;">
+            <div class="bnum" style="background:var(--rd);">★</div>
+            <div class="bbody">
+              <div class="bname" style="color:var(--rd);">Makosa 10 Yanayoua Biashara za WhatsApp</div>
+              <div class="bdesc">90% ya wanaoanza wanafanya makosa haya. Wewe usiyafanye — utapita wote mbele.</div>
+            </div>
+            <div class="bval">BURE</div>
+          </div>
+
+          <div class="bitem" style="background:#fff;">
+            <div class="bnum" style="background:#1A56DB;">★</div>
+            <div class="bbody">
+              <div class="bname" style="color:#1A56DB;">${obstacleBonus}</div>
+              <div class="bdesc">${n}, tuliandaa hasa kwa jibu lako la swali la 6</div>
+            </div>
+            <div class="bval">BURE</div>
+          </div>
+
+        </div>
+      </div>
+
+      <!-- VALUE STACK -->
+      <div class="vstack">
+        ${n} — unapata Modules 5 + Bonuses 3 = njia kamili ya TZS ${eb.price.toLocaleString()} inayokupeleka kutoka 0 hadi kipato chako cha kwanza
+      </div>
+
+      <!-- BEI -->
+      <div class="price-row">
+        <div>
+          <div style="font-size:12px;color:var(--muted);font-weight:500;margin-bottom:4px;">Bei ya Leo — Ofa ya Muda Mfupi:</div>
+          <div class="p-was">Thamani halisi: TZS ${eb.old.toLocaleString()}</div>
+          <div class="p-now"><sub>TZS</sub>${eb.price.toLocaleString()}</div>
+          <div style="font-size:12px;color:var(--muted);margin-top:4px">Malipo ya mara moja tu · Hakuna ada ya kila mwezi</div>
+        </div>
+        <div style="text-align:right">
+          <div class="save-pill">Unaokoa ${savePct}%</div>
+          <div style="font-size:11px;color:var(--gn);margin-top:6px;font-weight:600">✓ Pakua mara moja</div>
+          <div style="font-size:11px;color:var(--gn);margin-top:3px;font-weight:600">✓ Dhamana siku 30</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 30 DAYS MONEY BACK GUARANTEE -->
+    <div class="guar" style="background:linear-gradient(135deg,#E8F5F0,#F0FAF5);border:2px solid #00875A;">
+      <div style="font-size:34px;flex-shrink:0">🛡️</div>
+      <div>
+        <div style="font-size:15px;font-weight:700;color:var(--gn)">Dhamana ya Siku 30 — Pesa Yako Inalindwa</div>
+        <div style="font-size:13px;color:var(--ink2);margin-top:4px;line-height:1.6">
+          ${n}, kama ndani ya siku 30 hukupata thamani unayostahili —
+          <strong>tutakurudishia pesa yako yote bila maswali yoyote.</strong>
+          Hakuna fomu ngumu. Tuma ujumbe mmoja wa WhatsApp — tutakurudishia mara moja.
+          Tunaamini kwa bidhaa yetu — na tunaamini <em>kwako</em>.
+        </div>
+      </div>
+    </div>
+
+    <!-- DOWNLOAD MOJA KWA MOJA — BILA EMAIL -->
+    <div style="background:var(--ink);border-radius:16px;padding:20px 22px;margin-bottom:20px;">
+      <div style="font-size:12px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--or2);margin-bottom:8px;">📦 Lipa kwa Simu — Mara Moja</div>
+      <div style="font-size:13px;color:rgba(255,255,255,.8);line-height:1.6;margin-bottom:14px;">
+        Ingiza namba yako — simu italia moja kwa moja. Ingiza PIN tu. Bundle yako inafunguka papo hapo.
+      </div>
+      <button onclick="openModal()" style="width:100%;display:flex;align-items:center;justify-content:center;gap:8px;padding:15px;background:linear-gradient(135deg,var(--or),var(--or2));border-radius:12px;color:#fff;font-size:16px;font-weight:700;border:none;cursor:pointer;transition:opacity .2s;" onmouseover="this.style.opacity='.9'" onmouseout="this.style.opacity='1'">
+        📲 Lipa TZS ${eb.price.toLocaleString()} — Ingiza PIN Tu →
+      </button>
+    </div>
+
+    <div class="reviews-title">Wanachosema wateja kama wewe 👇</div>
+    <div class="reviews">${reviewHtml}</div>
+
+    <!-- CTA YA CHINI -->
+    <button onclick="openModal()" style="width:100%;display:flex;align-items:center;justify-content:center;gap:8px;padding:17px;background:linear-gradient(135deg,var(--or),var(--or2));border-radius:13px;color:#fff;font-size:16px;font-weight:700;border:none;cursor:pointer;margin-bottom:10px;">
+      Ndio ${n}, Nataka Mabadiliko — Anza Sasa TZS ${eb.price.toLocaleString()} →
+    </button>
+    <div class="trust-row">
+      <div class="ti">✅ Watanzania 2,400+</div>
+      <div class="ti">⭐ Rating 4.9/5</div>
+      <div class="ti">🇹🇿 Imeundwa Tanzania</div>
+      <div class="ti">📱 Simu inatosha</div>
+    </div>`;
+
+  document.getElementById('sticky').style.display='flex';
+  document.getElementById('stickyAmt').textContent=eb.price.toLocaleString();
+  document.getElementById('progFill').style.width='100%';
+  document.getElementById('progLabel').textContent=`${n}, Suluhisho Lako Liko Tayari! 🎉`;
+}
+
+// ── GOOGLE DRIVE DOWNLOAD LINKS ─────────────────
+// Badilisha BUNDLE_URL_XX na links halisi za Google Drive
+// baada ya kupakia bundles kwenye Google Drive
+// Kila bundle ina ebook + bonuses zake zote ndani — link moja tu!
+// Folder moja ina bundles zote 8 — link moja tu!
+const FOLDER_URL = "https://drive.google.com/drive/folders/117yvGXV_j3wHZpdc_6caktAnTQmCysIx?usp=sharing";
+const BUNDLE_URL_01 = FOLDER_URL;
+const BUNDLE_URL_02 = FOLDER_URL;
+const BUNDLE_URL_03 = FOLDER_URL;
+const BUNDLE_URL_04 = FOLDER_URL;
+const BUNDLE_URL_05 = FOLDER_URL;
+const BUNDLE_URL_06 = FOLDER_URL;
+const BUNDLE_URL_07 = FOLDER_URL;
+const BUNDLE_URL_08 = FOLDER_URL;
+
+const DRIVE_LINKS = {
+  noCapital:[
+    {name:"📦 Bundle Yako Kamili: Zero Shilingi, Mapato Makubwa", url:BUNDLE_URL_01,
+     desc:"Ebook kuu + Platforms 30+ + Scripts + Kalenda ya Siku 30 + Bonuses Zote"},
+  ],
+  unemployed:[
+    {name:"📦 Bundle Yako Kamili: Bila Kazi? Bado Una Nguvu", url:BUNDLE_URL_02,
+     desc:"Ebook kuu + Freelancing Guide + Biashara 5 za Simu + Mindset + Bonuses Zote"},
+  ],
+  lowIncome:[
+    {name:"📦 Bundle Yako Kamili: Kutoka Mshahara Mdogo Hadi Uhuru", url:BUNDLE_URL_02,
+     desc:"Ebook kuu + Bajeti ya Siri + Biashara 5 za TZS 20K + Msaada Miezi 3 + Bonuses Zote"},
+  ],
+  extraIncome:[
+    {name:"📦 Bundle Yako Kamili: Kipato cha Pili TZS 500K/Mwezi", url:BUNDLE_URL_03,
+     desc:"Ebook kuu + Automated Income + Affiliate Marketing + Email List + Bonuses Zote"},
+  ],
+  student:[
+    {name:"📦 Bundle Yako Kamili: Mwanachuo Tajiri", url:BUNDLE_URL_04,
+     desc:"Ebook kuu + Freelancing Guide + Social Media Money + Remote Job CV + Bonuses Zote"},
+  ],
+  savings:[
+    {name:"📦 Bundle Yako Kamili: Simamia Pesa Yako", url:BUNDLE_URL_06,
+     desc:"Ebook kuu + Bajeti ya Familia + Uwekezaji wa Kwanza + Akiba ya Dharura + Bonuses Zote"},
+  ],
+  hopeless:[
+    {name:"📦 Bundle Yako Kamili: Simama Tena — Anza Upya", url:BUNDLE_URL_08,
+     desc:"Ebook kuu + Hadithi 10 za Waliofufuka + Njia 5 za Haraka + Mindset + Bonuses Zote"},
+  ],
+  noEducation:[
+    {name:"📦 Bundle Yako Kamili: Ujuzi Ndiyo Unaolipa", url:BUNDLE_URL_01,
+     desc:"Ebook kuu + Video Tutorials Kiswahili + Hatua 0 hadi Pesa + Msaada WhatsApp 30 Siku"},
+  ],
+  freelancer:[
+    {name:"📦 Bundle Yako Kamili: Freelancer wa Kimataifa", url:BUNDLE_URL_05,
+     desc:"Ebook kuu + Upwork/Fiverr Profiles + Skills 10 + Proposal Templates + Bonuses Zote"},
+  ],
+  socialMedia:[
+    {name:"📦 Bundle Yako Kamili: Content Creator wa Pesa", url:BUNDLE_URL_06,
+     desc:"Ebook kuu + Content Calendar Miezi 3 + Caption Formulas + Brand Deals + Bonuses Zote"},
+  ],
+  dropshipping:[
+    {name:"📦 Bundle Yako Kamili: Dropshipping Tanzania", url:BUNDLE_URL_07,
+     desc:"Ebook kuu + Suppliers 50 + Bidhaa 20 Zinazouza + Facebook Ads Formula + Bonuses Zote"},
+  ],
+  debtFree:[
+    {name:"📦 Bundle Yako Kamili: Ondoa Madeni, Jenga Utajiri", url:BUNDLE_URL_08,
+     desc:"Ebook kuu + Debt Tracker + Njia 5 za Pesa Haraka + Mindset ya Utajiri + Bonuses Zote"},
+  ],
+};
+
+// ── ZENOPAY CONFIG ────────────────────────────────
+const SERVER_URL   = "https://tengeneza-pesa-server.onrender.com";
+
+let currentOrderId = null;
+let pollInterval   = null;
+let waitSeconds    = 0;
+
+function openModal(){
+  if(!curEbook) return;
+  document.getElementById('modalPrice').textContent = curEbook.price.toLocaleString();
+  resetModalState();
+  document.getElementById('overlay').classList.add('open');
+}
+
+function resetModalState(){
+  document.getElementById('payForm').style.display    = 'block';
+  document.getElementById('payWaiting').style.display = 'none';
+  document.getElementById('paySuccess').style.display = 'none';
+  document.getElementById('payError').style.display   = 'none';
+  document.getElementById('phoneInput').value         = '';
+  document.getElementById('phoneInput').style.borderColor = 'var(--line)';
+  document.getElementById('modalTitle').textContent   = 'Lipa kwa Simu Yako 📱';
+  document.getElementById('modalSub').textContent     = 'Ingiza namba yako — simu italia moja kwa moja!';
+  if(pollInterval){ clearInterval(pollInterval); pollInterval = null; }
+  waitSeconds = 0;
+  const btn = document.getElementById('payBtn');
+  if(btn){ btn.disabled = false; btn.style.opacity = '1';
+    btn.innerHTML = `📲 Tuma Ombi — TZS <span id="modalPrice">${curEbook?.price?.toLocaleString()||'9,999'}</span>`; }
+}
+
+function resetModal(){ resetModalState(); closeModal(); }
+
+async function startPayment(){
+  const phone = document.getElementById('phoneInput').value.trim();
+  if(!phone || phone.replace(/\D/g,'').length < 9){
+    document.getElementById('phoneInput').style.borderColor = 'var(--rd)';
+    document.getElementById('phoneInput').placeholder = 'Ingiza namba yako kwanza!';
+    document.getElementById('phoneInput').focus();
+    return;
+  }
+  const btn = document.getElementById('payBtn');
+  btn.disabled = true; btn.style.opacity = '.7';
+  btn.textContent = '⏳ Inaanzisha mfumo...';
+
+  // ── COLD START CHECK — piga server kabla ya kulipa ──
+  try {
+    const health = await fetch(`${SERVER_URL}/health`, {signal: AbortSignal.timeout(5000)});
+    if(!health.ok) throw new Error('server down');
+  } catch(e) {
+    // Server inalala — onyesha ujumbe na jaribu tena
+    btn.textContent = '⏳ Inaanzisha server... (sekunde 30)';
+    await new Promise(r => setTimeout(r, 8000));
+    try {
+      await fetch(`${SERVER_URL}/health`, {signal: AbortSignal.timeout(25000)});
+    } catch(e2) {
+      showPayError('Server haifiki sasa hivi. Jaribu tena baada ya dakika moja au wasiliana nasi WhatsApp.');
+      btn.disabled = false; btn.style.opacity = '1';
+      btn.innerHTML = `📲 Tuma Ombi — TZS ${curEbook?.price?.toLocaleString()||'9,999'}`;
+      return;
+    }
+  }
+
+  btn.textContent = '⏳ Inatuma ombi kwa simu yako...';
+
+  const netName = (() => {
+    const d = phone.replace(/\D/g,'');
+    const p = d.startsWith('0') ? d.slice(1,3) : d.slice(3,5);
+    if(['71','74','75','76'].includes(p)) return 'M-Pesa (Vodacom)';
+    if(['65','67','71','77'].includes(p)) return 'Tigo Pesa';
+    if(['68','69','78','79'].includes(p)) return 'Airtel Money';
+    return 'M-Pesa/Tigo/Airtel';
+  })();
+
+  document.getElementById('waitingPrice').textContent = curEbook?.price?.toLocaleString()||'9,999';
+
+  try {
+    const res = await fetch(`${SERVER_URL}/create-payment`, {
+      method: 'POST',
+      headers: {'Content-Type':'application/json'},
+      body: JSON.stringify({
+        phone,
+        amount:   curEbook?.price||9999,
+        name:     N(),
+        category: ans.cat || 'extraIncome'
+      })
+    });
+    const data = await res.json();
+
+    if(data.success){
+      currentOrderId = data.orderId;
+      document.getElementById('payForm').style.display    = 'none';
+      document.getElementById('payWaiting').style.display = 'block';
+      document.getElementById('modalTitle').textContent   = `Angalia Simu Yako! 📳`;
+      document.getElementById('modalSub').textContent     = `Ombi la ${netName} limetumwa — ingiza PIN yako`;
+      startPolling(data.orderId);
+    } else {
+      showPayError(data.message||'Tatizo limetokea — jaribu tena');
+      btn.disabled = false; btn.style.opacity = '1';
+      btn.innerHTML = `📲 Tuma Ombi — TZS ${curEbook?.price?.toLocaleString()||'9,999'}`;
+    }
+  } catch(err){
+    showPayError('Hakuna mtandao au server haifiki. Angalia internet yako na jaribu tena.');
+    btn.disabled = false; btn.style.opacity = '1';
+    btn.innerHTML = `📲 Tuma Ombi — TZS ${curEbook?.price?.toLocaleString()||'9,999'}`;
+  }
+}
+
+function startPolling(orderId){
+  waitSeconds = 0;
+  pollInterval = setInterval(async()=>{
+    waitSeconds++;
+    const el = document.getElementById('waitTimer');
+    if(el) el.textContent = `Sekunde ${waitSeconds} zimepita...`;
+    if(waitSeconds > 180){
+      clearInterval(pollInterval);
+      showPayError('Muda umekwisha. Kama umelipa — wasiliana nasi WhatsApp. Kama hukupata simu — jaribu tena.');
+      document.getElementById('payWaiting').style.display = 'none';
+      document.getElementById('payForm').style.display    = 'block';
+      return;
+    }
+    try {
+      const res  = await fetch(`${SERVER_URL}/payment-status?orderId=${orderId}`);
+      const data = await res.json();
+      if(data.paid){
+        clearInterval(pollInterval);
+        // Redirect kwenda success.html na orderId + category
+        const cat = data.category || ans.cat || 'extraIncome';
+        window.location.href = `success.html?orderId=${orderId}&category=${cat}`;
+      }
+    } catch(e){}
+  }, 3000);
+}
+
+function showSuccess(){
+  document.getElementById('payWaiting').style.display = 'none';
+  document.getElementById('paySuccess').style.display = 'block';
+  document.getElementById('modalTitle').textContent   = 'Umefanikiwa! 🎉';
+  document.getElementById('modalSub').textContent     = `${N()}, asante! Pakua bundle yako sasa:`;
+  document.getElementById('sticky').style.display     = 'none';
+}
+
+function showPayError(msg){
+  document.getElementById('payError').style.display = 'block';
+  document.getElementById('errorMsg').textContent   = msg;
+  if(pollInterval){clearInterval(pollInterval); pollInterval=null;}
+}
+
+function closeModal(){
+  document.getElementById('overlay').classList.remove('open');
+  if(pollInterval){clearInterval(pollInterval); pollInterval=null;}
+}
+
+function openWA(){
+  const msg = encodeURIComponent(
+    `Habari! Mimi ni ${N()}. Ninataka kulipa TZS ${curEbook?.price?.toLocaleString()||'9,999'} kwa "${curEbook?.name||'bundle'}". Order ID: ${currentOrderId||'N/A'}. Nisaidie tafadhali!`
+  );
+  window.open(`https://wa.me/${WA_NUM}?text=${msg}`,'_blank');
+}
+
+render();
+</script>
+</body>
+</html>
