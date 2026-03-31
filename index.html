@@ -46,6 +46,46 @@ body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--ink);min-
 .livebar{width:100%;max-width:600px;display:flex;align-items:center;gap:8px;padding:10px 14px;margin-bottom:14px;background:var(--white);border:1px solid var(--line);border-radius:10px;font-size:13px;color:var(--ink2);box-shadow:0 1px 4px rgba(0,0,0,.05);}
 .ldot{width:7px;height:7px;border-radius:50%;background:var(--gn);flex-shrink:0;animation:blink 1.4s infinite;}
 
+/* PERSONAL BRAND */
+.creator-bar{width:100%;max-width:600px;background:var(--white);border:1px solid var(--line);border-radius:18px;padding:18px 20px;margin-bottom:16px;display:flex;align-items:center;gap:16px;box-shadow:0 2px 12px rgba(0,0,0,.06);}
+.creator-svg{width:64px;height:64px;border-radius:50%;flex-shrink:0;border:3px solid var(--or);}
+.creator-info{flex:1;}
+.creator-name{font-family:'Bricolage Grotesque',sans-serif;font-size:17px;font-weight:700;color:var(--ink);margin-bottom:2px;}
+.creator-title{font-size:12px;color:var(--or);font-weight:600;margin-bottom:5px;}
+.creator-bio{font-size:12px;color:var(--muted);line-height:1.5;}
+.creator-badges{display:flex;gap:6px;flex-wrap:wrap;margin-top:7px;}
+.cbadge{font-size:10px;font-weight:600;padding:3px 9px;border-radius:100px;background:var(--or-bg);color:var(--or);border:1px solid var(--or-bd);}
+
+/* URGENCY BAR */
+.urgency-bar{width:100%;max-width:600px;background:linear-gradient(135deg,#1A0A00,#2D1000);border-radius:14px;padding:14px 18px;margin-bottom:14px;display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap;}
+.urg-left{display:flex;align-items:center;gap:8px;}
+.urg-fire{font-size:20px;flex-shrink:0;}
+.urg-text{font-size:12px;color:rgba(255,255,255,.85);line-height:1.4;}
+.urg-text strong{color:var(--or2);font-weight:700;}
+.urg-timer-wrap{display:flex;flex-direction:column;align-items:flex-end;gap:2px;}
+.urg-timer-label{font-size:9px;color:rgba(255,255,255,.5);letter-spacing:.08em;text-transform:uppercase;}
+.urg-timer{font-family:'Bricolage Grotesque',sans-serif;font-size:26px;font-weight:800;color:var(--or2);letter-spacing:.04em;line-height:1;}
+
+/* SOCIAL PROOF WALL */
+.proof-wall{width:100%;max-width:600px;margin-bottom:16px;}
+.proof-wall-title{font-size:11px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);margin-bottom:10px;text-align:center;}
+.proof-cards{display:flex;flex-direction:column;gap:8px;}
+.proof-card{background:var(--white);border:1px solid var(--line);border-radius:14px;padding:14px 16px;box-shadow:0 1px 6px rgba(0,0,0,.04);}
+.proof-card-top{display:flex;align-items:center;gap:10px;margin-bottom:8px;}
+.proof-avatar{width:38px;height:38px;border-radius:50%;flex-shrink:0;display:flex;align-items:center;justify-content:center;font-size:15px;font-weight:700;color:#fff;}
+.proof-meta{flex:1;}
+.proof-meta-name{font-size:13px;font-weight:600;color:var(--ink);}
+.proof-meta-loc{font-size:11px;color:var(--muted);}
+.proof-stars{color:#F59E0B;font-size:13px;letter-spacing:1px;}
+.proof-text{font-size:13px;color:var(--ink2);line-height:1.65;font-style:italic;}
+.proof-result-pill{display:inline-flex;align-items:center;gap:5px;margin-top:8px;padding:3px 10px;background:var(--gn-bg);border:1px solid #B0DDD0;border-radius:100px;font-size:11px;font-weight:600;color:var(--gn);}
+
+/* SCARCITY STRIP */
+.scarcity-strip{width:100%;max-width:600px;background:var(--rd-bg);border:1px solid #FCCEC9;border-radius:12px;padding:11px 16px;margin-bottom:14px;display:flex;align-items:center;gap:10px;font-size:12px;color:var(--rd);}
+.sc-bar-wrap{flex:1;height:6px;background:rgba(201,42,42,.15);border-radius:3px;overflow:hidden;}
+.sc-bar-fill{height:100%;background:var(--rd);border-radius:3px;}
+@keyframes pulse{0%,100%{transform:scale(1);}50%{transform:scale(1.05);}}
+
 /* PROGRESS */
 .prog-wrap{width:100%;max-width:600px;margin-bottom:18px;}
 .prog-top{display:flex;justify-content:space-between;align-items:center;margin-bottom:7px;}
@@ -230,11 +270,115 @@ textarea::placeholder{color:var(--muted);}
 <!-- LOGO -->
 <div class="logo"><div class="logo-name">Tengeneza<span>.</span>Pesa</div><div class="logo-tag">Maarifa · Kipato · Uhuru</div></div>
 
+<!-- PERSONAL BRAND -->
+<div class="creator-bar">
+  <svg class="creator-svg" viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg">
+    <circle cx="32" cy="32" r="32" fill="#1A1A1A"/>
+    <!-- Torso -->
+    <ellipse cx="32" cy="52" rx="18" ry="14" fill="#2C2C2C"/>
+    <!-- Shirt accent -->
+    <ellipse cx="32" cy="54" rx="14" ry="11" fill="#E8540A" opacity=".18"/>
+    <!-- Neck -->
+    <rect x="27" y="35" width="10" height="9" rx="4" fill="#8B6B4A"/>
+    <!-- Head -->
+    <ellipse cx="32" cy="26" rx="13" ry="14" fill="#8B6B4A"/>
+    <!-- Hair -->
+    <ellipse cx="32" cy="14" rx="13" ry="7" fill="#1A1A1A"/>
+    <ellipse cx="19" cy="22" rx="4" ry="6" fill="#1A1A1A"/>
+    <ellipse cx="45" cy="22" rx="4" ry="6" fill="#1A1A1A"/>
+    <!-- Eyes -->
+    <circle cx="26" cy="26" r="2" fill="#1A1A1A"/>
+    <circle cx="38" cy="26" r="2" fill="#1A1A1A"/>
+    <circle cx="26.8" cy="25.3" r=".7" fill="#fff"/>
+    <circle cx="38.8" cy="25.3" r=".7" fill="#fff"/>
+    <!-- Smile -->
+    <path d="M27 31 Q32 35 37 31" stroke="#5C3A1A" stroke-width="1.5" fill="none" stroke-linecap="round"/>
+    <!-- Orange collar -->
+    <path d="M26 44 L32 50 L38 44" stroke="#E8540A" stroke-width="2.5" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+  </svg>
+  <div class="creator-info">
+    <div class="creator-name">Juma Mwangi</div>
+    <div class="creator-title">Mwanzilishi — Tengeneza Pesa Tanzania</div>
+    <div class="creator-bio">Mimi mwenyewe nilianza bila pesa wala uzoefu. Leo ninasaidia Watanzania 2,400+ kupata kipato mtandaoni.</div>
+    <div class="creator-badges">
+      <span class="cbadge">✅ Mfumo halisi</span>
+      <span class="cbadge">🇹🇿 Mwafrika</span>
+      <span class="cbadge">📱 Simu tu</span>
+    </div>
+  </div>
+</div>
+
+<!-- URGENCY BAR -->
+<div class="urgency-bar">
+  <div class="urg-left">
+    <div class="urg-fire">🔥</div>
+    <div class="urg-text">Bei ya <strong>TZS 9,999</strong> inaisha usiku wa leo<br/>Kesho itarudi <strong>TZS 24,999</strong> — punguzo la leo tu</div>
+  </div>
+  <div class="urg-timer-wrap">
+    <div class="urg-timer-label">Inabaki</div>
+    <div class="urg-timer" id="urgTimer">--:--:--</div>
+  </div>
+</div>
+
+<!-- SCARCITY STRIP -->
+<div class="scarcity-strip">
+  <span style="font-weight:700;white-space:nowrap;">⚠️ Nafasi 7 tu:</span>
+  <div class="sc-bar-wrap"><div class="sc-bar-fill" style="width:72%"></div></div>
+  <span style="white-space:nowrap;font-weight:600;">18/25 zimechukuliwa leo</span>
+</div>
+
 <!-- PROOF BAR -->
 <div class="proof-bar">
   <div class="proof-item"><div class="proof-num">2,400+</div><div class="proof-lbl">Watanzania wamefanikiwa</div></div>
-  <div class="proof-item"><div class="proof-num">Ebooks 8</div><div class="proof-lbl">Mada tofauti — mtu mmoja mmoja</div></div>
   <div class="proof-item"><div class="proof-num">4.9★</div><div class="proof-lbl">Rating ya wateja wetu</div></div>
+  <div class="proof-item"><div class="proof-num">Siku 30</div><div class="proof-lbl">Hadi kipato cha kwanza</div></div>
+</div>
+
+<!-- SOCIAL PROOF WALL -->
+<div class="proof-wall">
+  <div class="proof-wall-title">👇 Wanachosema walionunua wiki hii</div>
+  <div class="proof-cards">
+
+    <div class="proof-card">
+      <div class="proof-card-top">
+        <div class="proof-avatar" style="background:linear-gradient(135deg,#E8540A,#FF7A35);">FM</div>
+        <div class="proof-meta">
+          <div class="proof-meta-name">Fatuma M.</div>
+          <div class="proof-meta-loc">📍 Dar es Salaam · Siku 18 zilizopita</div>
+        </div>
+        <div class="proof-stars">★★★★★</div>
+      </div>
+      <div class="proof-text">"Nilianza bila kitu chochote. Wiki 3 baadaye nilifanya TZS 85,000 ya kwanza kwenye WhatsApp. Sielewi kwa nini nilichelewa muda mrefu hivyo."</div>
+      <div class="proof-result-pill">✓ TZS 85,000 wiki ya 3</div>
+    </div>
+
+    <div class="proof-card">
+      <div class="proof-card-top">
+        <div class="proof-avatar" style="background:linear-gradient(135deg,#007A52,#0F9668);">PK</div>
+        <div class="proof-meta">
+          <div class="proof-meta-name">Peter K.</div>
+          <div class="proof-meta-loc">📍 Mwanza · Siku 11 zilizopita</div>
+        </div>
+        <div class="proof-stars">★★★★★</div>
+      </div>
+      <div class="proof-text">"Nilikuwa bila kazi miezi 8. Nilisoma mfumo huu, nikaanza freelancing. Wiki 3 baadaye nilifanya TZS 120,000 ya kwanza. Sasa sina bosi."</div>
+      <div class="proof-result-pill">✓ TZS 120,000 mwezi wa kwanza</div>
+    </div>
+
+    <div class="proof-card">
+      <div class="proof-card-top">
+        <div class="proof-avatar" style="background:linear-gradient(135deg,#5B21B6,#7C3AED);">AS</div>
+        <div class="proof-meta">
+          <div class="proof-meta-name">Amina S.</div>
+          <div class="proof-meta-loc">📍 Arusha · Siku 5 zilizopita</div>
+        </div>
+        <div class="proof-stars">★★★★★</div>
+      </div>
+      <div class="proof-text">"Kama mwanachuo bila pesa, hii ilinisaidia kuanza. Nilifanya TZS 150,000 kabla ya mwisho wa mwezi wa kwanza — bila kuacha masomo."</div>
+      <div class="proof-result-pill">✓ TZS 150,000 mwezi wa kwanza</div>
+    </div>
+
+  </div>
 </div>
 
 <!-- LIVE BAR -->
@@ -499,7 +643,20 @@ const QS=[
    placeholder:""},
 ];
 
-// ── TICKERS ────────────────────────────────────────
+// ── URGENCY TIMER — inaisha usiku wa leo ────────────
+function updateUrgTimer(){
+  const now  = new Date();
+  const end  = new Date();
+  end.setHours(23,59,59,0);
+  const diff = Math.max(0, end - now);
+  const h = String(Math.floor(diff/3600000)).padStart(2,'0');
+  const m = String(Math.floor((diff%3600000)/60000)).padStart(2,'0');
+  const s = String(Math.floor((diff%60000)/1000)).padStart(2,'0');
+  const el = document.getElementById('urgTimer');
+  if(el) el.textContent = `${h}:${m}:${s}`;
+}
+updateUrgTimer();
+setInterval(updateUrgTimer, 1000);
 const liveM=["Mtu kutoka Dar es Salaam amenunua dakika 3 zilizopita","Kijana kutoka Mwanza amenunua sasa hivi — ameanza safari yake","Mama kutoka Arusha amepata ebook yake — anaanza leo","Mtu aliyekuwa bila kazi Dodoma amejiunga sasa hivi","Mwanachuo kutoka Zanzibar amenunua ebook yake"];
 const bannerM=["Njia zilizothibitishwa za kutengeneza pesa mtandaoni — Tanzania","Ofa hii inaisha leo usiku wa manane — Usikose","Ebooks 8 + Bonuses 24 — Suluhisho lako la kibinafsi linakusubiri","Watu 2,400+ wa Tanzania wameshathibitisha mfumo huu"];
 let li=0,bi=0;
