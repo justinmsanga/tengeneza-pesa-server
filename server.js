@@ -2,47 +2,58 @@ const express = require('express');
 const cors    = require('cors');
 const axios   = require('axios');
 const crypto  = require('crypto');
-const Database = require('better-sqlite3');
+const fs      = require('fs');
+const path    = require('path');
 
 const app = express();
 app.use(cors());
 app.use(express.json());
 
 // ── CREDENTIALS ───────────────────────────────────────────
-const ACCOUNT_ID      = process.env.ZENOPAY_ACCOUNT_ID;
-const API_KEY         = process.env.ZENOPAY_API_KEY;
-const WEBHOOK_SECRET  = process.env.ZENOPAY_WEBHOOK_SECRET || '';
-const SERVER_URL      = process.env.SERVER_URL || 'https://tengeneza-pesa-server.onrender.com';
-const BASE_URL        = 'https://zenoapi.com/api/payments';
+const ACCOUNT_ID     = process.env.ZENOPAY_ACCOUNT_ID;
+const API_KEY        = process.env.ZENOPAY_API_KEY;
+const WEBHOOK_SECRET = process.env.ZENOPAY_WEBHOOK_SECRET || '';
+const SERVER_URL     = process.env.SERVER_URL || 'https://tengeneza-pesa-server.onrender.com';
+const BASE_URL       = 'https://zenoapi.com/api/payments';
 
 if (!ACCOUNT_ID || !API_KEY) {
-  console.error('❌ ZENOPAY_ACCOUNT_ID au ZENOPAY_API_KEY hazijasetwa!');
+  console.error('ZENOPAY_ACCOUNT_ID au ZENOPAY_API_KEY hazijasetwa!');
   process.exit(1);
 }
 
-// ── SQLite DATABASE ───────────────────────────────────────
-const db = new Database('./orders.db');
-db.exec(`
-  CREATE TABLE IF NOT EXISTS orders (
-    order_id   TEXT PRIMARY KEY,
-    status     TEXT DEFAULT 'PENDING',
-    amount     INTEGER,
-    mobile     TEXT,
-    name       TEXT,
-    category   TEXT DEFAULT 'extraIncome',
-    package    TEXT DEFAULT 'mini',
-    created_at INTEGER
-  )
-`);
+// ── JSON FILE STORE ───────────────────────────────────────
+// Inabadilisha better-sqlite3 — pure Node.js, hakuna compilation
+const DB_FILE = path.join('/tmp', 'orders.json');
 
-// Helper functions
-const dbGet = (id)   => db.prepare('SELECT * FROM orders WHERE order_id=?').get(id);
-const dbSet = (o)    => db.prepare(
-  'INSERT OR REPLACE INTO orders (order_id,status,amount,mobile,name,category,package,created_at) VALUES (?,?,?,?,?,?,?,?)'
-).run(o.order_id, o.status, o.amount, o.mobile, o.name, o.category, o.package, o.created_at);
-const dbPaid = (id)  => db.prepare("UPDATE orders SET status='PAID' WHERE order_id=?").run(id);
-const dbFindByPhone = (mobile) =>
-  db.prepare("SELECT * FROM orders WHERE mobile=? AND status='PAID' ORDER BY created_at DESC LIMIT 1").get(mobile);
+function loadDB() {
+  try { return JSON.parse(fs.readFileSync(DB_FILE, 'utf8')); }
+  catch(e) { return {}; }
+}
+function saveDB(data) {
+  try { fs.writeFileSync(DB_FILE, JSON.stringify(data, null, 2)); }
+  catch(e) { console.error('[DB] Kosa la kuhifadhi:', e.message); }
+}
+
+const dbGet = (id) => {
+  const db = loadDB();
+  return db[id] || null;
+};
+const dbSet = (o) => {
+  const db = loadDB();
+  db[o.order_id] = o;
+  saveDB(db);
+};
+const dbPaid = (id) => {
+  const db = loadDB();
+  if (db[id]) { db[id].status = 'PAID'; saveDB(db); }
+};
+const dbFindByPhone = (mobile) => {
+  const db = loadDB();
+  const matches = Object.values(db)
+    .filter(o => o.mobile === mobile && o.status === 'PAID')
+    .sort((a, b) => b.created_at - a.created_at);
+  return matches[0] || null;
+};
 
 // ── RATE LIMITING ─────────────────────────────────────────
 const rateMap = {};
@@ -53,27 +64,28 @@ function checkRate(ip, max=5, windowMs=60000) {
 }
 
 // ── VALIDATION ────────────────────────────────────────────
-function validAmount(a){const n=Number(a);return !isNaN(n)&&n>=500&&n<=100000;}
-function validPhone(p){const d=p.replace(/\D/g,'');return d.length>=9&&d.length<=13;}
-function cleanPhone(p){
+function validAmount(a) { const n=Number(a); return !isNaN(n)&&n>=100&&n<=500000; }
+function validPhone(p)  { const d=p.replace(/\D/g,''); return d.length>=9&&d.length<=13; }
+function cleanPhone(p)  {
   let d=p.replace(/\D/g,'');
-  if(d.startsWith('255'))d='0'+d.slice(3);
-  if(!d.startsWith('0'))d='0'+d;
+  if(d.startsWith('255')) d='0'+d.slice(3);
+  if(!d.startsWith('0'))  d='0'+d;
   return d;
 }
 
 // ── 1. HEALTH ─────────────────────────────────────────────
-app.get('/', (req,res) => res.json({status:'running',service:'Tengeneza Pesa Server',time:new Date().toISOString()}));
-app.get('/health', (req,res) => res.json({ok:true,time:new Date().toISOString()}));
+app.get('/', (req,res) => res.json({
+  status:'running', service:'Tengeneza Pesa Server', time:new Date().toISOString()
+}));
 
 // ── 2. ANZA MALIPO ────────────────────────────────────────
 app.post('/create-payment', async (req,res) => {
   const ip = req.headers['x-forwarded-for']||req.socket.remoteAddress||'unknown';
-  if(checkRate(ip)) return res.status(429).json({success:false,message:'Umejaribu mara nyingi. Subiri dakika moja.'});
+  if(checkRate(ip)) return res.status(429).json({success:false, message:'Umejaribu mara nyingi. Subiri dakika moja.'});
 
-  const {phone, amount, name, category, package: pkg} = req.body;
-  if(!phone||!validPhone(String(phone))) return res.status(400).json({success:false,message:'Namba ya simu si sahihi.'});
-  if(!amount||!validAmount(amount)) return res.status(400).json({success:false,message:'Kiasi si sahihi.'});
+  const {phone, amount, name, category} = req.body;
+  if(!phone||!validPhone(String(phone)))  return res.status(400).json({success:false, message:'Namba ya simu si sahihi.'});
+  if(!amount||!validAmount(amount))       return res.status(400).json({success:false, message:'Kiasi si sahihi.'});
 
   const mobile  = cleanPhone(String(phone));
   const orderId = `TP-${Date.now()}-${Math.random().toString(36).slice(2,6).toUpperCase()}`;
@@ -88,16 +100,24 @@ app.post('/create-payment', async (req,res) => {
       webhook_url: `${SERVER_URL}/webhook`,
     };
     console.log(`[CREATE] ${mobile} | TZS ${amount} | ${orderId}`);
-    const response = await axios.post(`${BASE_URL}/mobile_money_tanzania`, payload,
-      {headers:{'Content-Type':'application/json','x-api-key':API_KEY},timeout:30000});
+
+    const response = await axios.post(
+      `${BASE_URL}/mobile_money_tanzania`, payload,
+      {headers:{'Content-Type':'application/json','x-api-key':API_KEY}, timeout:30000}
+    );
     const data = response.data;
     console.log('[CREATE] ZenoPay:', JSON.stringify(data));
 
-    if(data.status==='success'){
-      // Hifadhi kwenye SQLite — inabaki hata server ikianzishwa upya
-      dbSet({order_id:orderId, status:'PENDING', amount:Number(amount),
-        mobile, name:name||'Mteja', category:category||'extraIncome',
-        package:pkg||'mini', created_at:Date.now()});
+    if(data.status==='success') {
+      dbSet({
+        order_id:   orderId,
+        status:     'PENDING',
+        amount:     Number(amount),
+        mobile,
+        name:       name||'Mteja',
+        category:   category||'extraIncome',
+        created_at: Date.now()
+      });
       return res.json({success:true, orderId, message:'STK Push imetumwa.'});
     } else {
       return res.status(400).json({success:false, message:data.message||'Imeshindwa kutuma.'});
@@ -112,45 +132,47 @@ app.post('/create-payment', async (req,res) => {
 // ── 3. ANGALIA HALI ───────────────────────────────────────
 app.get('/payment-status', async (req,res) => {
   const {orderId} = req.query;
-  if(!orderId) return res.status(400).json({success:false,message:'orderId inahitajika.'});
+  if(!orderId) return res.status(400).json({success:false, message:'orderId inahitajika.'});
 
   const order = dbGet(orderId);
 
   // Angalia DB kwanza
   if(order?.status==='PAID')
-    return res.json({success:true,paid:true,status:'PAID',category:order.category});
-
-  // Expired baada ya dakika 10
-  if(order && Date.now()-order.created_at > 600000)
-    return res.json({success:true,paid:false,status:'EXPIRED'});
+    return res.json({success:true, paid:true, status:'PAID', category:order.category});
 
   try {
-    const response = await axios.get(`${BASE_URL}/order-status`,
-      {params:{order_id:orderId}, headers:{'x-api-key':API_KEY}, timeout:15000});
+    const response = await axios.get(
+      `${BASE_URL}/order-status`,
+      {params:{order_id:orderId}, headers:{'x-api-key':API_KEY}, timeout:15000}
+    );
     const data      = response.data;
     const orderData = Array.isArray(data.data)?data.data[0]:data.data;
     const status    = orderData?.payment_status||data.status||'PENDING';
     const isPaid    = ['COMPLETED','PAID','SUCCESS','SUCCESSFUL'].includes(String(status).toUpperCase());
+
     console.log(`[STATUS] ${orderId}: ${status}`);
     if(isPaid) dbPaid(orderId);
-    return res.json({success:true, paid:isPaid, status:isPaid?'PAID':'PENDING',
-      category:order?.category||'extraIncome'});
+
+    return res.json({
+      success:  true,
+      paid:     isPaid,
+      status:   isPaid?'PAID':'PENDING',
+      category: order?.category||'extraIncome'
+    });
   } catch(err) {
     console.error('[STATUS] Kosa:', err.response?.data||err.message);
-    return res.json({success:true, paid:false, status:'PENDING'});
+    return res.json({success:true, paid:false, status:'PENDING', category:order?.category||'extraIncome'});
   }
 });
 
 // ── 4. WEBHOOK ────────────────────────────────────────────
 app.post('/webhook', (req,res) => {
-  // Signature verification — ikiwa ZenoPay inatoa signature
   if(WEBHOOK_SECRET) {
-    const sig      = req.headers['x-zenopay-signature'] || req.headers['x-signature'] || '';
+    const sig      = req.headers['x-zenopay-signature']||req.headers['x-signature']||'';
     const expected = crypto.createHmac('sha256', WEBHOOK_SECRET)
-                           .update(JSON.stringify(req.body))
-                           .digest('hex');
-    if(sig !== expected) {
-      console.warn('[WEBHOOK] ⚠️ Signature batili — imekataliwa');
+                           .update(JSON.stringify(req.body)).digest('hex');
+    if(sig!==expected) {
+      console.warn('[WEBHOOK] Signature batili');
       return res.status(401).json({error:'Signature batili'});
     }
   }
@@ -164,7 +186,7 @@ app.post('/webhook', (req,res) => {
     const isPaid = ['COMPLETED','PAID','SUCCESS','SUCCESSFUL'].includes(String(status).toUpperCase());
     if(isPaid) {
       dbPaid(orderId);
-      console.log(`[WEBHOOK] ✅ IMELIPWA: ${orderId}`);
+      console.log(`[WEBHOOK] IMELIPWA: ${orderId}`);
     }
   }
   res.status(200).json({received:true});
@@ -173,21 +195,23 @@ app.post('/webhook', (req,res) => {
 // ── 5. RECOVER ────────────────────────────────────────────
 app.get('/recover', (req,res) => {
   const {phone} = req.query;
-  if(!phone) return res.status(400).json({success:false,message:'Namba inahitajika.'});
+  if(!phone) return res.status(400).json({success:false, message:'Namba inahitajika.'});
+
   const mobile = cleanPhone(String(phone));
   const order  = dbFindByPhone(mobile);
+
   if(order) {
-    console.log(`[RECOVER] ✅ ${mobile} → ${order.order_id}`);
+    console.log(`[RECOVER] ${mobile} → ${order.order_id}`);
     return res.json({success:true, found:true, orderId:order.order_id, category:order.category});
   }
-  console.log(`[RECOVER] ❌ ${mobile} — haijapatikana`);
+  console.log(`[RECOVER] ${mobile} — haijapatikana`);
   return res.json({success:true, found:false});
 });
 
 // ── START ─────────────────────────────────────────────────
 const PORT = process.env.PORT||3000;
 app.listen(PORT, () => {
-  console.log(`✅ Tengeneza Pesa Server — port ${PORT}`);
-  console.log(`📦 Database: SQLite (orders.db)`);
-  console.log(`🔐 Webhook signature: ${WEBHOOK_SECRET?'IMEWASHWA':'IMEZIMWA (weka ZENOPAY_WEBHOOK_SECRET)'}`);
+  console.log(`Tengeneza Pesa Server — port ${PORT}`);
+  console.log(`Store: JSON file (${DB_FILE})`);
+  console.log(`URL: ${SERVER_URL}`);
 });
